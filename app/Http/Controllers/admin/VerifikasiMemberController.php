@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,10 +18,11 @@ class VerifikasiMemberController extends Controller
      */
     public function index()
     {
-        // $members = User::with(['user'])->get();
-        //  return view('admin.verifikasimember.index' , ['members' => $members]);
-        $members = User::where("status","pending","ditolak")->get();
-        return view('admin.verifikasimember.index' , ['members' => $members]);
+        $members = User::where([
+            ['role', 'user'],
+            ['status', 'menunggu']
+        ])->get();
+        return view('admin.verifikasimember.index', ['members' => $members]);
     }
 
     /**
@@ -32,39 +33,6 @@ class VerifikasiMemberController extends Controller
     public function create()
     {
         //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $verifikasimember = VerifikasiMember::create([
-            'namalengkap' => $request->namalengkap,
-            'nomoridentitas' => $request->nomoridentitas,
-            'alamatidentitas' =>$request->alamatidentitas,
-            'fotoidentitas' => $request->fotoidentitas,
-            'tanggal_lahir' => $request->tanggal_lahir,
-        ]);
-        return redirect()->route('verifikasimember.index');
-    //     //  $dokter = $user->dokter()->create([
-    //     //     'deskripsi' => $request->deskripsi,
-    //     //     'foto' => "public/dokter/{$user->nama}.{$foto->extension()}"
-    //     // ]);
-    //    $foto = $request->file('fotoidentitas');
-    //    // $foto->storeAs('verifikasimember', "{$verifikasimember->nama}.{$foto->extension()}");
-    //     $verifikasimember = VerifikasiMember::create([
-    //         'namalengkap' => $request->namalengkap,
-    //         'nomoridentitas' => $request->nomoridentitas,
-    //         'alamatidentitas' => $request->alamatidentitas,
-    //         'fotoidentitas' => $request->fotoidentitas,
-    //         'tanggal_lahir' => $request->tanggal_lahir,
-
-    //     ]);
-    //     return redirect()->route('verifikasimember.index');
     }
 
     /**
@@ -81,17 +49,6 @@ class VerifikasiMemberController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,17 +57,30 @@ class VerifikasiMemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $verifikasi = VerifikasiMember::firstWhere('user_id',$id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($request->aksi == 'ditolak') {
+            if (!$verifikasi->user()->update(['status' => 'ditolak'])) {
+                return redirect()->route('admin.verifikasimember.index')->with('fail', 'Terjadi kesalahan sistem');
+            }
+
+            if (!VerifikasiMember::destroy($verifikasi->id)) {
+                return redirect()->route('admin.verifikasimember.index')->with('fail', 'Terjadi kesalahan sistem');
+            }
+
+            return redirect()->route('admin.verifikasimember.index')->with('ok', "User {$verifikasi->user->nama} berhasil ditolak");
+        } else if ($request->aksi == 'diterima') {
+            if (!$verifikasi->user()->update(['status' => 'diterima'])) {
+                return redirect()->route('admin.verifikasimember.index')->with('fail', 'Terjadi kesalahan sistem');
+            }
+
+            if (!VerifikasiMember::destroy($verifikasi->id)) {
+                return redirect()->route('admin.verifikasimember.index')->with('fail', 'Terjadi kesalahan sistem');
+            }
+
+            return redirect()->route('admin.verifikasimember.index')->with('ok', "User {$verifikasi->user->nama} berhasil diterima");
+        } else {
+            return redirect()->route('admin.verifikasimember.index');
+        }
     }
 }

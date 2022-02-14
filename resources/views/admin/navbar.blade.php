@@ -1,9 +1,9 @@
 <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+        <form class="form-inline me-auto">
+          <ul class="navbar-nav me-3">
+            <li><a href="#" data-bs-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-bs-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
           <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
@@ -30,19 +30,19 @@
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-3-50.png" alt="product">
+                  <img class="me-3 rounded" width="30" src="../assets/img/products/product-3-50.png" alt="product">
                   oPhone S9 Limited Edition
                 </a>
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-2-50.png" alt="product">
+                  <img class="me-3 rounded" width="30" src="../assets/img/products/product-2-50.png" alt="product">
                   Drone X2 New Gen-7
                 </a>
               </div>
               <div class="search-item">
                 <a href="#">
-                  <img class="mr-3 rounded" width="30" src="../assets/img/products/product-1-50.png" alt="product">
+                  <img class="me-3 rounded" width="30" src="../assets/img/products/product-1-50.png" alt="product">
                   Headphone Blitz
                 </a>
               </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="search-item">
                 <a href="#">
-                  <div class="search-icon bg-danger text-white mr-3">
+                  <div class="search-icon bg-danger text-white me-3">
                     <i class="fas fa-code"></i>
                   </div>
                   Stisla Admin Template
@@ -59,7 +59,7 @@
               </div>
               <div class="search-item">
                 <a href="#">
-                  <div class="search-icon bg-primary text-white mr-3">
+                  <div class="search-icon bg-primary text-white me-3">
                     <i class="fas fa-laptop"></i>
                   </div>
                   Create a new Homepage Design
@@ -69,7 +69,7 @@
           </div>
         </form>
         <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">Messages
                 <div class="float-right">
@@ -135,7 +135,7 @@
               </div>
             </div>
           </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">Notifications
                 <div class="float-right">
@@ -194,8 +194,8 @@
               </div>
             </div>
           </li>
-          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+          <li class="dropdown"><a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle me-1">
             <div class="d-sm-none d-lg-inline-block">Hi,fsaan</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
@@ -235,7 +235,7 @@
               </li>
               <li class="menu-header">Starter</li>
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+                <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
                   <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>

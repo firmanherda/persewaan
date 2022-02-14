@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -46,7 +47,8 @@ class BarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $barang = Barang::with(['kategori'])->find($id);
+        return view('user.showbarang', ['barang' => $barang]);
     }
 
     /**

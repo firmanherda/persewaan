@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
@@ -17,8 +17,9 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $keranjangs = Keranjang::all();
-        return view('user.keranjang.index' , ['keranjangs' => $keranjangs]);
+        $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
+
+        return view('user.keranjang.index', ['keranjangs' => $keranjangs]);
     }
 
     /**
@@ -42,12 +43,12 @@ class KeranjangController extends Controller
     {
         $keranjangs = Keranjang::create([
             'nama' => $request->nama,
-            'barang_id' => $request->barang ,
+            'barang_id' => $request->barang,
             'jumlah' => $request->jumlah,
         ]);
         return redirect()->route('keranjang.index')->with('status', 'Keranjang telah ditambah');
-            //$nama = $request->input('nama');
-            //$barang_id = $request->input('barang_id');
+        //$nama = $request->input('nama');
+        //$barang_id = $request->input('barang_id');
 
         // $jumlah = $request->input('jumlah');
         // $keranjang = new Keranjang();

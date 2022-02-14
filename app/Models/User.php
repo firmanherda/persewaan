@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'password', 'email', 'no_hp' , 'alamat', 'status',
+        'nama', 'password', 'email', 'no_hp', 'alamat', 'status',
     ];
 
     /**
@@ -39,4 +39,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function verifikasiMember()
+    {
+        return $this->hasOne(VerifikasiMember::class);
+    }
+
+    public function keranjangs()
+    {
+        return $this->hasMany(Keranjang::class);
+    }
+
+    public function transaksis()
+    {
+        return $this->hasMany(transaksis::class);
+    }
 }

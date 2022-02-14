@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             //$table->timestamp('email_verified_at')->nullable();
             $table->string('no_hp');
             $table->string('alamat');
-            $table->enum('status', ['pending','diterima', 'ditolak']);
-            $table->enum('role', ['admin','user']);
+            $table->enum('status', ['pending', 'menunggu', 'diterima', 'ditolak']);
+            $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

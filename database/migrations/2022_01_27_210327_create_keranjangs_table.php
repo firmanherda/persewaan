@@ -15,9 +15,16 @@ class CreateKeranjangsTable extends Migration
     {
         Schema::create('keranjangs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('barang_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('nama');
-            $table->integer('barang_id')->unsigned();
-            $table->string('jumlah');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

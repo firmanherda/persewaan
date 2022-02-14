@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -17,7 +18,7 @@ class BarangController extends Controller
     public function index()
     {
         $barangs = Barang::all();
-        return view('admin.barang.index' , ['barangs' => $barangs]);
+        return view('admin.barang.index', ['barangs' => $barangs]);
     }
 
     /**
@@ -39,21 +40,17 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $barangs = Barang::create([
+        $barang = Barang::create([
             'nama' => $request->nama,
-            'kategori_id' => $request->kategori ,
+            'kategori_id' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'stok' => $request->stok,
-            'harga' =>$request->harga,
-            'link_foto' => $request->nama .".jpg",
-        // $barang->nama = $request->nama;
-        // $barang->kategori_id = $request->kategori;
-        // $barang->deskripsi = $request->deskripsi;
-        // $barang->stok = $request->stok;
-        // $barang->harga = $request->harga;
-        // $barang->link_foto = 'img/'.$request->file;
-        // $barang->save();
-    ]);
+            'harga' => $request->harga,
+        ]);
+
+        $barang->update(['link_foto' => "{$barang->id}.jpg"]);
+
+        Storage::putFileAs('public/img', $request->file, "{$barang->id}.jpg");
 
         //dd($barang); //cara cari tau isi variable barang
         return redirect()->route('admin.barang.index')->with('status', 'Barang telah ditambah');
@@ -126,6 +123,6 @@ class BarangController extends Controller
         $namaBarang = $barangs->nama;
         $barangs->delete();
 
-        return redirect(action('barang.index'))->with('Status','Barang dengan nama'.$namaBarang. 'telah dihapus');
+        return redirect()->route('admin.barang.index')->with('Status', 'Barang dengan nama' . $namaBarang . 'telah dihapus');
     }
 }

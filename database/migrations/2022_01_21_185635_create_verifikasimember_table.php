@@ -13,13 +13,16 @@ class CreateVerifikasimemberTable extends Migration
      */
     public function up()
     {
-        Schema::create('verifikasimember', function (Blueprint $table) {
+        Schema::create('verifikasi_members', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->string('namalengkap');
-            $table->string('nomoridentitas');
-            $table->string('alamatidentitas');
-            $table->string('fotoidentitas');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->string('nama_lengkap');
+            $table->string('nomor_identitas');
+            $table->string('alamat_identitas');
+            $table->string('foto_identitas')->nullable();
             $table->date('tanggal_lahir');
         });
     }

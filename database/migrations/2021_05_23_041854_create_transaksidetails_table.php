@@ -13,13 +13,18 @@ class CreateTransaksidetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaksidetails', function (Blueprint $table) {
-            $table->increments('id');
-            $table->date('tanggal_kembali');
-            $table->string('denda');
-            $table->enum('status',['Hilang','Rusak']);
-            $table->integer('transaksi_id')->unsigned();
-            $table->integer('barang_id')->unsigned();
+        Schema::create('transaksi_details', function (Blueprint $table) {
+            $table->id('id');
+            $table->foreignId('transaksi_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('barang_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->integer('denda');
+            $table->enum('status', ['Hilang', 'Rusak']);
             $table->timestamps();
         });
     }

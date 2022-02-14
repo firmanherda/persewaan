@@ -159,7 +159,7 @@ $(function() {
         sidebar_nicescroll = $(".main-sidebar").getNiceScroll();
       }, 500);
       $(".main-sidebar .sidebar-menu > li > ul .dropdown-title").remove();
-      $(".main-sidebar .sidebar-menu > li > a").removeAttr('data-toggle');
+      $(".main-sidebar .sidebar-menu > li > a").removeAttr('data-bs-toggle');
       $(".main-sidebar .sidebar-menu > li > a").removeAttr('data-original-title');
       $(".main-sidebar .sidebar-menu > li > a").removeAttr('title');
     }else{
@@ -174,9 +174,9 @@ $(function() {
           me.find('> .dropdown-menu').hide();
           me.find('> .dropdown-menu').prepend('<li class="dropdown-title pt-3">'+ me.find('> a').text() +'</li>');
         }else{
-          me.find('> a').attr('data-toggle', 'tooltip');
+          me.find('> a').attr('data-bs-toggle', 'tooltip');
           me.find('> a').attr('data-original-title', me.find('> a').text());
-          $("[data-toggle='tooltip']").tooltip({
+          $("[data-bs-toggle='tooltip']").tooltip({
             placement: 'right'
           });
         }
@@ -184,7 +184,7 @@ $(function() {
     }
   }
 
-  $("[data-toggle='sidebar']").click(function() {
+  $("[data-bs-toggle='sidebar']").click(function() {
     var body = $("body"),
       w = $(window);
 
@@ -307,7 +307,7 @@ $(function() {
   toggleLayout();
   $(window).resize(toggleLayout);
 
-  $("[data-toggle='search']").click(function() {
+  $("[data-bs-toggle='search']").click(function() {
     var body = $("body");
 
     if(body.hasClass('search-gone')) {
@@ -320,10 +320,10 @@ $(function() {
   });
 
   // tooltip
-  $("[data-toggle='tooltip']").tooltip();
+  $("[data-bs-toggle='tooltip']").tooltip();
 
   // popover
-  $('[data-toggle="popover"]').popover({
+  $('[data-bs-toggle="popover"]').popover({
     container: 'body'
   });
 
@@ -537,7 +537,7 @@ $(function() {
   });
 
   // Slide Toggle
-  $('[data-toggle-slide]').click(function() {
+  $('[data-bs-toggle-slide]').click(function() {
     let target = $(this).data('toggle-slide');
 
     $(target).slideToggle();

@@ -79,7 +79,7 @@ $("#modal-5").fireModal({
 $("#modal-6").fireModal({
   body: '<p>Now you can see something on the left side of the footer.</p>',
   created: function(modal) {
-    modal.find('.modal-footer').prepend('<div class="mr-auto"><a href="#">I\'m a hyperlink!</a></div>');
+    modal.find('.modal-footer').prepend('<div class="me-auto"><a href="#">I\'m a hyperlink!</a></div>');
   },
   buttons: [
     {

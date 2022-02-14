@@ -14,12 +14,15 @@ class CreateTransaksisTable extends Migration
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('jumlah');
             $table->string('total_harga');
-            $table->date('tanggal_sewa');
-            $table->date('tanggal_batas_kembali');
-            $table->integer('user_id')->unsigned();
+            $table->dateTime('tanggal_sewa');
+            $table->dateTime('tanggal_batas_kembali');
             $table->timestamps();
         });
     }

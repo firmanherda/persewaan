@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Keranjang extends Model
 {
-    // protected $table = "keranjangs";
-    // protected $guarded = [];
-    protected $fillable = ['nama','barang_id','jumlah'];
+    protected $fillable = ['nama', 'barang_id', 'jumlah'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function barang()
     {
-        return $this->belongsTo('App\Models\Barang','barang_id');
+        return $this->belongsTo(Barang::class);
     }
 }
