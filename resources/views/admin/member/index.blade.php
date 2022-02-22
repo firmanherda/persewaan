@@ -18,7 +18,7 @@
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Tanggal Terdaftar</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                             <td>{{ $m->id }}</td>
                             <td>{{ $m->nama }}</td>
                             <td>{{ $m->email }}</td>
-                            <td>{{$m->status}}</td>>
+                            <td>{{$m->created_at}}</td>>
                             <td>
                                 <button class="btnDetailMember btn btn-sm btn-primary text-white"
                     data-id="{{ $m->id }}">Detail</button>
@@ -45,7 +45,7 @@
                                     <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
                                 {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
                                 {{-- </form> --}}
-                            </td>
+
                         </tr>
                     @endforeach
                     </tbody>
@@ -129,7 +129,7 @@
             orderable: true
           },
           {
-            name: 'Status',
+            name: 'Tanggal Terdaftar',
             orderable: true
           },
           {

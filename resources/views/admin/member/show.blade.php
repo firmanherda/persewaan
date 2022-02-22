@@ -23,6 +23,25 @@
         <dd class="col-8">{{ $member->email }}</dd>
       </div>
     </div>
+    <div class="mx-2 mb-3">
+      <div class="row">
+        <dt class="col-4">No HP</dt>
+        <dd class="col-8">{{ $member->no_hp }}</dd>
+      </div>
+    </div>
+    <div class="mx-2 mb-3">
+      <div class="row">
+        <dt class="col-4">Alamat</dt>
+        <dd class="col-8">{{ $member->alamat }}</dd>
+      </div>
+    </div>
+    <div class="mx-2 mb-3">
+      <div class="row">
+        <dt class="col-4">Status</dt>
+        <dd class="col-8">{{ $member->status }}</dd>
+      </div>
+    </div>
+
 
     {{-- <div class="mx-2">
       <h5>Servis</h5>

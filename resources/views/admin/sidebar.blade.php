@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a href="{{ route('homeadmin') }}" class="nav-link"><i
             class="fas fa-fire"></i><span>Dashdsdsboard</span></a>
-      <li><a class="nav-link" href="#"><i class="far fa-user  "></i>
+      <li><a class="nav-link" href="{{ route('admin.member.index') }}"><i class="far fa-user  "></i>
           <span>Member</span></a></li>
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.verifikasimember.index') }}"><i class="far fa-user  "></i>
@@ -40,8 +40,8 @@
         <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
           <span>Layout</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-          <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+          <li><a class="nav-link" href="layout-default.html">Kriteria</a></li>
+          <li><a class="nav-link" href="layout-transparent.html">Alternatif</a></li>
           {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
         </ul>
       </li>
