@@ -16,7 +16,7 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
   <ul class="navbar-nav navbar-right">
     <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown"
         class="nav-link notification-toggle nav-link-lg beep"><i class="fas fa-shopping-bag"></i></a>
-      <div class="dropdown-menu dropdown-list dropdown-menu-right">
+      <div class="dropdown-menu dropdown-list dropdown-menu-end">
         <div class="dropdown-header">
           <p>Keranjang</p>
         </div>
@@ -24,7 +24,7 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
           @forelse ($keranjangs as $keranjang)
             <a href="#" class="dropdown-item dropdown-item-unread">
               <div class="dropdown-item-icon bg-primary text-white">
-                <img src="https://picsum.photos/50" alt="">
+                <img src="{{ asset("storage/img/{$keranjang->barang->link_foto}") }}" height="100%" alt="">
               </div>
               <div class="dropdown-item-desc">
                 <div class="d-inline-block text-truncate">{{ $keranjang->barang->nama }}</div>
@@ -40,11 +40,11 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
         </div>
       </div>
     </li>
-    <li class="dropdown"><a href="#" data-bs-toggle="dropdown"
-        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+    <li class="dropdown">
+      <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <div class="d-sm-none d-lg-inline-block">Hi,{{ Auth::user()->nama }}</div>
       </a>
-      <div class="dropdown-menu dropdown-menu-right">
+      <div class="dropdown-menu dropdown-menu-end">
         <a href="features-profile.html" class="dropdown-item has-icon">
           <i class="far fa-user"></i> Profile
         </a>

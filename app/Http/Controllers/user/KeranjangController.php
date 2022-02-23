@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\Keranjang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class KeranjangController extends Controller
 {
@@ -39,25 +40,26 @@ class KeranjangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $keranjangs = Keranjang::create([
-            'nama' => $request->nama,
-            'barang_id' => $request->barang,
-            'jumlah' => $request->jumlah,
-        ]);
-        return redirect()->route('keranjang.index')->with('status', 'Keranjang telah ditambah');
-        //$nama = $request->input('nama');
-        //$barang_id = $request->input('barang_id');
+        try {
+            Auth::user()->keranjangs()->create([
+                'barang_id' => $request->barang,
+                'jumlah' => $request->jumlah,
+            ]);
 
-        // $jumlah = $request->input('jumlah');
-        // $keranjang = new Keranjang();
-        // $keranjang->nama = Auth::user()->nama;
-        // $keranjang->barang_id = $id;
-        // $keranjang->jumlah = $jumlah;
-        // $keranjang->save();
-        // return back()->with('status', 'Keranjang telah ditambah');
+            $barang = Barang::find($request->barang);
+            $barang->update([
+                'stok' => $barang->stok - $request->jumlah
+            ]);
 
+            return redirect()->route('user.keranjang.index')->with([
+                'status' => 'OK',
+                'msg' => 'Barang telah ditambahkan ke keranjang'
+            ]);
+        } catch (Throwable $e) {
+            return redirect()->back()->withErrors("Barang gagal ditambahkan ke keranjang; {$e->getMessage()}");
+        }
     }
 
     /**

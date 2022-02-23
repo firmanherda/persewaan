@@ -10,6 +10,7 @@ use App\Http\Controllers\User\BarangController as UserBarangController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
 use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
 use App\Http\Controllers\User\ProfilController as UserProfilController;
+use App\Http\Controllers\User\TransaksiController as UserTransaksiController;
 use App\Http\Controllers\User\VerifikasiMemberController as UserVerifikasiMemberController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,7 @@ Route::name('user.')->group(function () {
     Route::resource('profil', UserProfilController::class);
     Route::resource('barang', UserBarangController::class);
     Route::resource('keranjang', UserKeranjangController::class);
+    Route::resource('transaksi', UserTransaksiController::class);
 });
+
+Route::get('cek/{barang}', [UserBarangController::class, 'cekStok']);

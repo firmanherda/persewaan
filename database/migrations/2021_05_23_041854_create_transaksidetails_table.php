@@ -23,8 +23,10 @@ class CreateTransaksidetailsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->integer('denda');
-            $table->enum('status', ['Hilang', 'Rusak']);
+            $table->string('jumlah');
+            $table->integer('subtotal');
+            $table->integer('denda')->nullable();
+            $table->enum('status', ['Hilang', 'Rusak'])->nullable();
             $table->timestamps();
         });
     }

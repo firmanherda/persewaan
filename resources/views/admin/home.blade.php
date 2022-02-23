@@ -107,7 +107,7 @@
             <h4>Top 5 Products</h4>
             <div class="card-header-action dropdown">
               <a href="#" data-bs-toggle="dropdown" class="btn btn-danger dropdown-toggle">Month</a>
-              <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+              <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
                 <li class="dropdown-title">Select Period</li>
                 <li><a href="#" class="dropdown-item">Today</a></li>
                 <li><a href="#" class="dropdown-item">Week</a></li>
@@ -121,7 +121,7 @@
               <li class="media">
                 <img class="me-3 rounded" width="55" src="../assets/img/products/product-3-50.png" alt="product">
                 <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">86 Sales</div></div>
+                  <div class="float-end"><div class="font-weight-600 text-muted text-small">86 Sales</div></div>
                   <div class="media-title">oPhone S9 Limited</div>
                   <div class="mt-1">
                     <div class="budget-price">
@@ -138,7 +138,7 @@
               <li class="media">
                 <img class="me-3 rounded" width="55" src="../assets/img/products/product-4-50.png" alt="product">
                 <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">67 Sales</div></div>
+                  <div class="float-end"><div class="font-weight-600 text-muted text-small">67 Sales</div></div>
                   <div class="media-title">iBook Pro 2018</div>
                   <div class="mt-1">
                     <div class="budget-price">
@@ -155,7 +155,7 @@
               <li class="media">
                 <img class="me-3 rounded" width="55" src="../assets/img/products/product-1-50.png" alt="product">
                 <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">63 Sales</div></div>
+                  <div class="float-end"><div class="font-weight-600 text-muted text-small">63 Sales</div></div>
                   <div class="media-title">Headphone Blitz</div>
                   <div class="mt-1">
                     <div class="budget-price">
@@ -172,7 +172,7 @@
               <li class="media">
                 <img class="me-3 rounded" width="55" src="../assets/img/products/product-3-50.png" alt="product">
                 <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">28 Sales</div></div>
+                  <div class="float-end"><div class="font-weight-600 text-muted text-small">28 Sales</div></div>
                   <div class="media-title">oPhone X Lite</div>
                   <div class="mt-1">
                     <div class="budget-price">
@@ -189,7 +189,7 @@
               <li class="media">
                 <img class="me-3 rounded" width="55" src="../assets/img/products/product-5-50.png" alt="product">
                 <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">19 Sales</div></div>
+                  <div class="float-end"><div class="font-weight-600 text-muted text-small">19 Sales</div></div>
                   <div class="media-title">Old Camera</div>
                   <div class="mt-1">
                     <div class="budget-price">

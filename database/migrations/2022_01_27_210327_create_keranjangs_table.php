@@ -23,8 +23,7 @@ class CreateKeranjangsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('nama');
-            $table->integer('jumlah');
+            $table->integer('jumlah')->default(1);
             $table->timestamps();
         });
     }

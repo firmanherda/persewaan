@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Barang;
+use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Throwable;
 
-class BarangController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,7 +40,24 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $keranjangs = Keranjang::where('user_id', Auth::id())->get();
+
+            $transaksi = Transaksi::create([
+                'user_id' => Auth::id(),
+                'total_harga' => $keranjangs->sum('subtotal'),
+                'tanggal_sewa' => Carbon::parse($request->tanggal_sewa)->format('Y-m-d'),
+                'tanggal_batas_kembali' => Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
+            ]);
+
+            $transaksi->transaksiDetails()->createMany($keranjangs->toArray());
+
+            Keranjang::where('user_id', Auth::id())->delete();
+
+            return redirect()->route('user.barang.index');
+        } catch (Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -50,8 +68,7 @@ class BarangController extends Controller
      */
     public function show($id)
     {
-        $barang = Barang::with(['kategori'])->find($id);
-        return view('user.showbarang', ['barang' => $barang]);
+        //
     }
 
     /**
@@ -86,23 +103,5 @@ class BarangController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function cekStok(Request $request, $id)
-    {
-        $tanggalCek = Carbon::parse($request->tanggal)->format('Y-m-d');
-
-        $stok = Barang::find($id)->stok;
-        $bookingsMulaiSewa = Transaksi::select('transaksis.*', DB::raw('sum(transaksi_details.jumlah) as jumlah'))
-            ->leftJoin('transaksi_details', 'transaksi_details.transaksi_id', '=', 'transaksis.id')
-            ->where('transaksi_details.barang_id', $id)
-            ->where('transaksis.tanggal_sewa', '<=', $tanggalCek) // 22 <= 24
-            ->where('transaksis.tanggal_batas_kembali', '>=', $tanggalCek) // 27 <= 24
-            ->groupBy('transaksis.id')
-            ->get()
-            ->sum('jumlah');
-        $stok -= $bookingsMulaiSewa;
-
-        dd($stok);
     }
 }

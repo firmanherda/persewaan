@@ -11,14 +11,36 @@
         </div>
         <div class="my-auto">
           <p>{{ $keranjang->barang->nama }}</p>
+          <p>Jumlah: {{ $keranjang->jumlah }}</p>
           <p class="subtotal" data-subtotal="{{ $keranjang->barang->harga * $keranjang->jumlah }}">
-            @rupiah($keranjang->barang->harga * $keranjang->jumlah)</p>
+            Subtotal: @rupiah($keranjang->barang->harga * $keranjang->jumlah)</p>
         </div>
       @endforeach
     </div>
-
     <div class="row">
-      <div class="col"></div>
+      <div class="col">
+        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal"
+          data-bs-target="#modalCheckout">{{ __('Checkout') }}</button>
+      </div>
+    </div>
+
+    <div id="modalCheckout" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Masukkan keranjang</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('user.transaksi.store') }}" method="POST">
+              @csrf
+              <input type="date" name="tanggal_sewa">
+              <input type="date" name="tanggal_batas_kembali">
+              <button type="submit" class="btn btn-primary">Checkout</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 @endsection
@@ -28,7 +50,6 @@
     $(function() {
       $('.subtotal').each(function() {
         var subtotal = $(this).data('subtotal');
-        console.log(subtotal);
       })
     });
   </script>
