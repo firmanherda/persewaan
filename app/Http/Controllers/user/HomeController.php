@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Barang;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         $barangs = Barang::all();
-        return view('user.home' , ['barangs' => $barangs]);
+        // $users = Auth::user();
+        return view('user.home' , ['barangs' => $barangs,]);
 
     }
 
@@ -50,8 +52,8 @@ class HomeController extends Controller
     public function show($id)
     {
         $barangs = Barang::find($id);
-
-        return view('user.showbarang', ['barang' => $barangs]);
+        $users = Auth::user();
+        return view('user.showbarang', ['barang' => $barangs, 'users' => $users]);
     }
 
     /**

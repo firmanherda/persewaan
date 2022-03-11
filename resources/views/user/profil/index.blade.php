@@ -1,6 +1,5 @@
 @extends('user.app')
 @section('content')
-
   <div class="card w-100">
     <div class="card-body">
       <h4 class="card-title">
@@ -58,10 +57,8 @@
           <p class="card-text">{{ $user->created_at }}</p>
         </div>
       </div>
-      <a href="{{ route('homeuser') }}" class="btn btn-primary"> Back </a>
+      <a href="{{ route('user.home') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
   </div>
-
-
 @endsection

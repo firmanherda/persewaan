@@ -8,22 +8,22 @@
     </div>
     <ul class="sidebar-menu">
 
-      <li class="menu-header">Dashboardsdsd</li>
+      <li class="menu-header"></li>
       <li class="nav-item">
         <a href="{{ route('homeadmin') }}" class="nav-link"><i
-            class="fas fa-fire"></i><span>Dashdsdsboard</span></a>
+            class="fas fa-fire"></i><span>Home</span></a>
       <li><a class="nav-link" href="{{ route('admin.member.index') }}"><i class="far fa-user  "></i>
           <span>Member</span></a></li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown"s
       <li><a class="nav-link" href="{{ route('admin.verifikasimember.index') }}"><i class="far fa-user  "></i>
           <span>Verifikasi Member</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="far fa-square"></i>
+      <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="fas fa-backpack"></i>
           <span>Barang</span></a></li>
       <li><a class="nav-link" href="#"><i class="far fa-user  "></i>
           <span>Paket</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="#"><i class="far fa-envelope  "></i>
+      <li><a class="nav-link" href="{{ route('admin.pesanan.index') }}"><i class="far fa-envelope  "></i>
           <span>Pesanan Masuk</span></a></li>
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="#"><i class="far fa-bell  "></i>

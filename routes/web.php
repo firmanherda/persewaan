@@ -40,17 +40,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('pesanan', AdminPesananController::class, ['as' => 'admin']);
 });
 
-Route::get('home', [UserHomeController::class, 'index'])->name('homeuser');
-
-Route::prefix('profil')->group(function () {
-    Route::resource('verifikasi', UserVerifikasiMemberController::class, ['as' => 'user.profil'])->except(['index', 'destroy']);
-});
-
 Route::name('user.')->group(function () {
+    Route::get('home', [UserHomeController::class, 'index'])->name('home');
     Route::resource('profil', UserProfilController::class);
     Route::resource('barang', UserBarangController::class);
     Route::resource('keranjang', UserKeranjangController::class);
     Route::resource('transaksi', UserTransaksiController::class);
-});
 
-Route::get('cek/{barang}', [UserBarangController::class, 'cekStok']);
+    Route::prefix('profil')->group(function () {
+        Route::resource('verifikasi', UserVerifikasiMemberController::class, ['as' => 'profil'])->except(['index', 'destroy']);
+    });
+});

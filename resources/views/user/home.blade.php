@@ -11,8 +11,13 @@
             <img class="mx-auto d-block mb-3" width="100%" src="{{ asset("storage/img/{$b->link_foto}") }}">
             <a class="h4 text-decoration-none fw-bold" href="{{ route('user.barang.show', $b->id) }}"
               class="card-title">{{ $b->nama }} </a>
-            <p class="card-text"> RP. {{ $b->harga }} / Hari</p>
+            <p class="card-text"> @rupiah($b->harga) / Hari</p>
             <a href="{{ route('user.barang.show', $b->id) }}" class="btn btn-primary">LIHAT DETAIl</a>
+            {{-- @if ($user->status == 'pending')
+            <button type="button" class="btn btn-secondary btn-lg" disabled>LIHAT DETAIL</button>
+            @else
+            <a href="{{ route('user.barang.show', $b->id) }}" class="btn btn-primary">LIHAT DETAIl</a>
+            @endif --}}
           </div>
         </div>
       </div>

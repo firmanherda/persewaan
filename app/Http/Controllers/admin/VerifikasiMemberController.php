@@ -71,6 +71,7 @@ class VerifikasiMemberController extends Controller
             return redirect()->route('admin.verifikasimember.index')->with('ok', "User {$verifikasi->user->nama} berhasil ditolak");
         } else if ($request->aksi == 'diterima') {
             if (!$verifikasi->user()->update(['status' => 'diterima'])) {
+                //harusnya verifikasi berhasil
                 return redirect()->route('admin.verifikasimember.index')->with('fail', 'Terjadi kesalahan sistem');
             }
 

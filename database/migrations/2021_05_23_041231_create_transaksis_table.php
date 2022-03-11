@@ -19,6 +19,8 @@ class CreateTransaksisTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('jumlah');
+            $table->enum('status', ['Diterima', 'Ditolak']);
             $table->string('total_harga');
             $table->date('tanggal_sewa');
             $table->date('tanggal_batas_kembali');

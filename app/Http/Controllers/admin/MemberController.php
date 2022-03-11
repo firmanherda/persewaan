@@ -18,7 +18,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = User::where("status","diterima")->get();
+        // $members = User::where("status","diterima")->get();
+        $members = User::where("role","user")->get();
+        // $members = User::all();
         return view('admin.member.index' , ['members' => $members]);
     }
 

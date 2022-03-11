@@ -18,7 +18,7 @@
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Tanggal Terdaftar</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                             <td>{{ $m->id }}</td>
                             <td>{{ $m->nama }}</td>
                             <td>{{ $m->email }}</td>
-                            <td>{{$m->created_at}}</td>>
+                            <td>{{$m->status}}</td>>
                             <td>
                                 <button class="btnDetailMember btn btn-sm btn-primary text-white"
                     data-id="{{ $m->id }}">Detail</button>
@@ -129,7 +129,7 @@
             orderable: true
           },
           {
-            name: 'Tanggal Terdaftar',
+            name: 'Status',
             orderable: true
           },
           {

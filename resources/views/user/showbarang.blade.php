@@ -1,65 +1,45 @@
 @extends('user.app')
 @section('content')
-  <h2 class="text-black mt-2">Detail Barang</h2>
-
   @if ($errors->any())
     <h4>{{ $errors->first() }}</h4>
   @endif
 
-  <form action="{{ route('user.keranjang.store') }}" method="POST">
+  <form class="mt-2" action="{{ route('user.keranjang.store') }}" method="POST">
     @csrf
     <div class="card">
-      <div class="card-body">
-        <img class="mx-auto d-block mb-3" width="25%" src="{{ asset("storage/img/{$barang->link_foto}") }}">
-        <div class="mx-2 mb-3">
-          <div class="row">
-            <dt class="col-4">Kategori</dt>
-            <dd class="col-8">{{ $barang->kategori->nama }}</dd>
-          </div>
+      <div class="card-body p-4 p-md-5">
+        <div class="d-inline-flex align-content-center text-black">
+          <a class="my-auto me-2 text-black" href="{{ route('user.home') }}"><i class="fa fa-arrow-left"
+              style="font-size: 1.5em;"></i></a>
+          <span class="h2 fw-bold my-auto">Detail Barang</span>
         </div>
-        <div class="mx-2 mb-3">
-          <div class="row">
-            <dt class="col-4">Nama</dt>
-            <dd class="col-8">{{ $barang->nama }}</dd>
-          </div>
-        </div>
-        <div class="mx-2 mb-3">
-          <div class="row">
-            <dt class="col-4">Stock</dt>
-            <dd class="col-8">{{ $barang->stok }}</dd>
-          </div>
-        </div>
-        <div class="mx-2 mb-3">
-          <div class="row">
-            <dt class="col-4">Harga</dt>
-            <dd class="col-8">{{ $barang->harga }}</dd>
-          </div>
-        </div>
-
-        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal"
-          data-bs-target="#modalJumlah">{{ __('Masukkan Keranjang') }}</button>
-
-        <div id="calendar"></div>
-      </div>
-    </div>
-
-    <div id="modalJumlah" class="modal fade" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Masukkan keranjang</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p class="h5">Subtotal: <span id="subtotal">Rp {{ $barang->harga }}</span></p>
-            <div class="d-inline-flex align-items-center">
-              <input type="hidden" name="barang" value="{{ request()->barang }}">
-              <div class="pe-2 flex-grow-1">
-                <input type="number" class="form-control w-100" name="jumlah" min="1" max="{{ $barang->stok }}"
-                  id="jumlah" placeholder="Jumlah" value="1">
+        <div class="row mt-4">
+          <img class="col-12 col-md-6" width="100%" src="{{ asset("storage/img/{$barang->link_foto}") }}">
+          <div class="col-12 col-md-6 ps-md-4 mt-4 mt-sm-0">
+            <div class="d-flex flex-column justify-content-between h-100">
+              <div class="row">
+                <p class="text-black h3 fw-bold pb-2">{{ $barang->nama }}</p>
+                <p class="text-black h2 fw-bold">@rupiah($barang->harga)</p>
+                <p class="mt-4 mb-1 text-black fw-bold">Detail</p>
+                <hr />
+                <p>{{ $barang->deskripsi }}</p>
               </div>
-              <div class="ps-2">
-                <button type="submit" class="btn btn-primary text-white">Masukkan</button>
+
+              <div class="row">
+                <p class="h6 px-0">Stok: <span>{{ $barang->stok }}</span></p>
+                <div class="d-inline-flex align-content-center justify-content-between w-100 px-0">
+                  <input type="hidden" class="d-none" name="barang" value="{{ request()->barang }}">
+                  <div class="flex-grow-1 pe-4">
+                    <input type="number" class="form-control w-100" autocomplete="off" name="jumlah" min="1"
+                      max="{{ $barang->stok }}" id="jumlah" placeholder="Jumlah" value="1">
+                  </div>
+                  <p class="h5 my-auto">Subtotal: <span id="subtotal">@rupiah($barang->harga)</span>
+                  </p>
+                </div>
+
+                <button type="submit" class="btn btn-primary text-white col-12 mt-4"
+                  @if (auth()->user()->status != 'diterima') disabled @endif>{{ __('Masukkan Keranjang') }}
+                </button>
               </div>
             </div>
           </div>
@@ -76,11 +56,13 @@
 
       $('#jumlah').change(function() {
         var jumlah = $(this).val();
-        var subtotal = $('#subtotal').text("Rp " + (jumlah * harga));
-      })
+        var subtotal = (jumlah * harga).toLocaleString('id-ID');
+
+        $('#subtotal').text("Rp " + subtotal);
+      });
     });
 
-    $(document).on('DOMContentLoaded', function() {
+    $(document).on('DOMContentLoaded', () => {
       var calendar = new FullCalendar.Calendar($('#calendar'), {
         plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
         initialView: 'dayGridMonth',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Carbon\Carbon;
@@ -41,20 +42,34 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         try {
+            $checkout = true;
             $keranjangs = Keranjang::where('user_id', Auth::id())->get();
+
+            foreach ($keranjangs as $keranjang) {
+                if (!$keranjang->checkoutable) {
+                    $checkout = false;
+                }
+            }
+
+            if (!$checkout) {
+                return redirect()->route('user.keranjang.index')->withErrors(['status' => 'Stok barang tidak mencukupi']);
+            }
 
             $transaksi = Transaksi::create([
                 'user_id' => Auth::id(),
+                // 'jumlah' => $keranjangs
+
                 'total_harga' => $keranjangs->sum('subtotal'),
+                'jumlah' => $request->jumlah,
                 'tanggal_sewa' => Carbon::parse($request->tanggal_sewa)->format('Y-m-d'),
                 'tanggal_batas_kembali' => Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
             ]);
 
-            $transaksi->transaksiDetails()->createMany($keranjangs->toArray());
+            // $transaksi->transaksiDetails()->createMany($keranjangs->toArray());
 
             Keranjang::where('user_id', Auth::id())->delete();
 
-            return redirect()->route('user.barang.index');
+            return redirect()->route('user.home');
         } catch (Throwable $e) {
             return $e->getMessage();
         }

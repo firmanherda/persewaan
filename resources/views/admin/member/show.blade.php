@@ -37,8 +37,8 @@
     </div>
     <div class="mx-2 mb-3">
       <div class="row">
-        <dt class="col-4">Status</dt>
-        <dd class="col-8">{{ $member->status }}</dd>
+        <dt class="col-4">Tanggal Daftar</dt>
+        <dd class="col-8">{{ $member->created_at }}</dd>
       </div>
     </div>
 

@@ -50,7 +50,7 @@ class LoginController extends Controller
         else
         {
             // return redirect()-> route('user.home.index');
-            return redirect()-> route('homeuser');
+            return redirect()-> route('user.home');
         }
 
     }

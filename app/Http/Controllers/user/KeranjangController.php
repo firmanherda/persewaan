@@ -19,7 +19,7 @@ class KeranjangController extends Controller
     public function index()
     {
         $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
-
+        // dd($keranjangs->toJson());
         return view('user.keranjang.index', ['keranjangs' => $keranjangs]);
     }
 
@@ -43,15 +43,21 @@ class KeranjangController extends Controller
     public function store(Request $request)
     {
         try {
-            Auth::user()->keranjangs()->create([
-                'barang_id' => $request->barang,
-                'jumlah' => $request->jumlah,
-            ]);
+            $user = Auth::user();
 
-            $barang = Barang::find($request->barang);
-            $barang->update([
-                'stok' => $barang->stok - $request->jumlah
-            ]);
+            $keranjang = Keranjang::where([
+                ['user_id', $user->id],
+                ['barang_id', $request->barang]
+            ])->first();
+
+            if ($keranjang) {
+                $keranjang->update(['jumlah' => $keranjang->jumlah + $request->jumlah]);
+            } else {
+                $user->keranjangs()->create([
+                    'barang_id' => $request->barang,
+                    'jumlah' => $request->jumlah,
+                ]);
+            }
 
             return redirect()->route('user.keranjang.index')->with([
                 'status' => 'OK',

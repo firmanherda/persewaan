@@ -10,21 +10,39 @@
 
       <li class="menu-header">Halaman User</li>
       <li class="nav-item">
-        <a href="{{ route('homeuser') }}" class="nav-link">
+        <a href="{{ route('user.home') }}" class="nav-link">
           <i class="fas fa-fire"></i>
           <span>Home</span>
         </a>
       <li>
       <li class="nab-item">
         <a class="nav-link" href="{{ route('user.profil.index') }}">
-          <i class="far fa-user"></i>
+          <i class="fas fa-address-card"></i>
           <span>Profil</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('user.barang.index') }}">
           <i class="far fa-square"></i>
           <span>Paket</span>
+        </a>
+      </li> --}}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('user.keranjang.index') }}">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Keranjang</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="far fa-clock"></i>
+          <span>Pesanan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-receipt"></i>
+          <span>Sedang disewa</span>
         </a>
       </li>
       <li class="nav-item">
@@ -33,12 +51,7 @@
           <span>Riwayat Pesanan</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.keranjang.index') }}">
-          <i class="far fa-user"></i>
-          <span>Keranjang</span>
-        </a>
-      </li>
+
       <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown">
           <i class="fas fa-columns"></i>

@@ -4,10 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
-use App\Models\Transaksi;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -18,7 +15,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.home');
     }
 
     /**
@@ -88,7 +85,7 @@ class BarangController extends Controller
         //
     }
 
-    public function cekStok(Request $request, $id)
+    /* public function cekStok(Request $request, $id)
     {
         $tanggalCek = Carbon::parse($request->tanggal)->format('Y-m-d');
 
@@ -104,5 +101,5 @@ class BarangController extends Controller
         $stok -= $bookingsMulaiSewa;
 
         dd($stok);
-    }
+    } */
 }

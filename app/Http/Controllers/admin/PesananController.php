@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
@@ -14,7 +15,11 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
+        // $pesanans = Transaksi::get();
+        $pesanans = Transaksi::all();
+        //dd($pesanans);
+        // $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
+        return view('admin.pesanan.index', compact('pesanans'));
     }
 
     /**
@@ -69,7 +74,7 @@ class PesananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $pesanans = Transaksi::firstWhere();
     }
 
     /**

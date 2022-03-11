@@ -2,6 +2,15 @@
 @section('content')
   <h2>Barang user </h2>
 
+  @error('status')
+    <div class="alert alert-danger" role="alert">
+      <div class="d-inline-flex align-items-center">
+        <i class="fa fa-exclamation-triangle me-2"></i>
+        <span>{{ $message }}</span>
+      </div>
+    </div>
+  @enderror
+
   <div class="bg-white p-4 rounded shadow">
     <div class="d-flex justify-content-between align-middle">
       @foreach ($keranjangs as $keranjang)
@@ -9,7 +18,7 @@
           <img class="img-fluid" src="{{ asset("storage/img/{$keranjang->barang->link_foto}") }}"
             alt="{{ $keranjang->barang->nama }}">
         </div>
-        <div class="my-auto">
+        <div class="my-auto @if (!$keranjang->checkoutable) bg-danger @endif">
           <p>{{ $keranjang->barang->nama }}</p>
           <p>Jumlah: {{ $keranjang->jumlah }}</p>
           <p class="subtotal" data-subtotal="{{ $keranjang->barang->harga * $keranjang->jumlah }}">
@@ -45,7 +54,7 @@
   </div>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
   <script>
     $(function() {
       $('.subtotal').each(function() {
@@ -53,4 +62,4 @@
       })
     });
   </script>
-@endpush
+@endpush --}}
