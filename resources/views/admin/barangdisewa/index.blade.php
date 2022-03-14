@@ -81,24 +81,3 @@
       <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
   </form>
 @endsection
-
-@push('scripts')
-  <script>
-    $(function() {
-      $('.btn-aksi').click(function(e) {
-        e.preventDefault();
-        const {
-          transaksi,
-          customer,
-          aksi
-        } = $(this).data();
-
-        $('#aksi').val(aksi);
-        $('#customer').val(customer);
-
-        $('#form-aksi').prop('action', route('admin.pesanan.update', transaksi));
-        $('#form-aksi').submit();
-      });
-    });
-  </script>
-@endpush

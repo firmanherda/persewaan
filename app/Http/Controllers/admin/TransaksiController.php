@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Barang;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class PesananController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +16,7 @@ class PesananController extends Controller
      */
     public function index()
     {
-        // $pesanans = Transaksi::get();
-        $pesanans = Transaksi::all();
-        //dd($pesanans);
-        // $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
-        return view('admin.pesanan.index', compact('pesanans'));
+        //
     }
 
     /**
@@ -76,21 +71,7 @@ class PesananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transaksi = Transaksi::find($id);
-        $transaksi->update(['status' => $request->aksi]);
 
-        if ($request->aksi == 'Berhasil') {
-            $transaksiDetails = $transaksi->transaksiDetails;
-
-            foreach ($transaksiDetails as $detail) {
-                $barang = Barang::find($detail->barang_id);
-                $barang->update(['stok' => $barang->stok - 1]);
-            }
-        } else if ($request->aksi == 'Ditolak') {
-            $transaksi->transaksiDetails()->delete();
-        }
-
-        return redirect()->route('admin.pesanan.index');
     }
 
     /**

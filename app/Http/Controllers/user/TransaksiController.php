@@ -43,9 +43,21 @@ class TransaksiController extends Controller
     {
         try {
             $checkout = true;
-            $keranjangs = Keranjang::where('user_id', Auth::id())->get();
+            $keranjangs = Keranjang::with('barang')->where('user_id', Auth::id())->get();
+            $transaksiDetails = [];
+            $jumlah = 0;
 
             foreach ($keranjangs as $keranjang) {
+                $jumlah += $keranjang->jumlah;
+
+                for ($i = 0; $i < $keranjang->jumlah; $i++) {
+                    $newKeranjang = $keranjang;
+                    $newKeranjang->subtotal = $newKeranjang->barang->harga;
+                    unset($newKeranjang->id);
+
+                    array_push($transaksiDetails, $newKeranjang->toArray());
+                }
+
                 if (!$keranjang->checkoutable) {
                     $checkout = false;
                 }
@@ -57,15 +69,14 @@ class TransaksiController extends Controller
 
             $transaksi = Transaksi::create([
                 'user_id' => Auth::id(),
-                // 'jumlah' => $keranjangs
-
                 'total_harga' => $keranjangs->sum('subtotal'),
-                'jumlah' => $request->jumlah,
+                'jumlah' => $jumlah,
                 'tanggal_sewa' => Carbon::parse($request->tanggal_sewa)->format('Y-m-d'),
                 'tanggal_batas_kembali' => Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
             ]);
 
-            // $transaksi->transaksiDetails()->createMany($keranjangs->toArray());
+            $transaksiDetails = $transaksi->transaksiDetails()->createMany($transaksiDetails);
+            $transaksi->update(['total_harga' => $transaksiDetails->sum('subtotal')]);
 
             Keranjang::where('user_id', Auth::id())->delete();
 
