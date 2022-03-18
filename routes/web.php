@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\Admin\BarangController as AdminBarangController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\admin\KriteriaController as AdminKriteriaController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\PesananController as AdminPesananController;
+use App\Http\Controllers\Admin\AlternatifController as AdminAlternatifController;
 use App\Http\Controllers\Admin\VerifikasiMemberController as AdminVerifikasiMemberController;
+
 
 use App\Http\Controllers\User\BarangController as UserBarangController;
 use App\Http\Controllers\User\HomeController as UserHomeController;
@@ -38,6 +41,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('member', AdminMemberController::class, ['as' => 'admin']);
     Route::resource('verifikasimember', AdminVerifikasiMemberController::class, ['as' => 'admin']);
     Route::resource('pesanan', AdminPesananController::class, ['as' => 'admin']);
+    Route::resource('kriteria', AdminKriteriaController::class, ['as' => 'admin']);
+    Route::resource('alternatif', AdminAlternatifController::class, ['as' => 'admin']);
 });
 
 Route::name('user.')->group(function () {

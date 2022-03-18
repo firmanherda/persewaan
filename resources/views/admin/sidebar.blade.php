@@ -40,8 +40,8 @@
         <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
           <span>Layout</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="layout-default.html">Kriteria</a></li>
-          <li><a class="nav-link" href="layout-transparent.html">Alternatif</a></li>
+          <li><a class="nav-link" href="{{ route('admin.kriteria.index') }}">Kriteria</a></li>
+          <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Alternatif</a></li>
           {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
         </ul>
       </li>

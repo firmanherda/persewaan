@@ -72,7 +72,7 @@ class TransaksiController extends Controller
                 'total_harga' => $keranjangs->sum('subtotal'),
                 'jumlah' => $jumlah,
                 'tanggal_sewa' => Carbon::parse($request->tanggal_sewa)->format('Y-m-d'),
-                'tanggal_batas_kembali' => Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
+                'tanggal_batas_kembali'=> Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
             ]);
 
             $transaksiDetails = $transaksi->transaksiDetails()->createMany($transaksiDetails);
