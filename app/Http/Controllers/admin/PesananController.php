@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
+use App\Models\TransaksiDetail;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
@@ -53,7 +54,9 @@ class PesananController extends Controller
      */
     public function show($id)
     {
-        //
+        $transaksi = Transaksi::with(['transaksiDetails.barang', 'user'])->find($id);
+
+        return view('admin.pesanan.show', compact('transaksi'));
     }
 
     /**
@@ -64,7 +67,9 @@ class PesananController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transaksiDetail = TransaksiDetail::find($id);
+
+        return response()->json($transaksiDetail);
     }
 
     /**

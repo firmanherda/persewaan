@@ -17,6 +17,11 @@ class TransaksiDetail extends Model
         'denda',
     ];
 
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class);
