@@ -1,7 +1,8 @@
 @extends('user.app')
 @section('content')
   <h2 class="text-black mt-2">Barang</h2>
-
+  <input type="date" name="tanggal_sewa">
+  <input type="date" name="tanggal_batas_kembali">
   <div class="row row-cols-2 row-cols-md-4">
 
     @foreach ($barangs as $b)

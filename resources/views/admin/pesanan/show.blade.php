@@ -30,9 +30,9 @@
           <tr>
             <th>No.</th>
             <th>Barang</th>
-            <th>Status</th>
+            {{-- <th>Status</th>
             <th>Denda</th>
-            <th>Aksi</th>
+            <th>Aksi</th> --}}
           </tr>
         </thead>
         <tbody>
@@ -40,13 +40,13 @@
             <tr>
               <td>{{ $loop->iteration }}</td>
               <td>{{ $td->barang->nama }}</td>
-              <td>{{ $td->status ?: '-' }}</td>
+              {{-- <td>{{ $td->status ?: '-' }}</td>
               <td>{{ $td->denda ?: '-' }}</td>
               <td class="text-center">
                 <button type="button" class="btn button-primary btn-link btn-edit" data-id="{{ $td->id }}">
                   <i class="fa fa-edit"></i>
                 </button>
-              </td>
+              </td> --}}
             </tr>
           @endforeach
         </tbody>

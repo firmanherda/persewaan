@@ -20,16 +20,16 @@
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="fas fa-backpack"></i>
           <span>Barang</span></a></li>
-      <li><a class="nav-link" href="#"><i class="far fa-user  "></i>
-          <span>Paket</span></a></li>
+      {{-- <li><a class="nav-link" href="#"><i class="far fa-user  "></i>
+          <span>Paket</span></a></li> --}}
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.pesanan.index') }}"><i class="far fa-envelope  "></i>
           <span>Pesanan Masuk</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="#"><i class="far fa-bell  "></i>
+      <li><a class="nav-link" href="{{ route('admin.barangdisewa.index') }}"><i class="far fa-bell  "></i>
           <span>Barang Sedang Disewa</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="#"><i class="far fa-file  "></i>
+      <li><a class="nav-link" href="{{ route('admin.riwayattransaksi.index') }}"><i class="far fa-file  "></i>
           <span>Riwayat Transaksi Selesai</span></a></li>
 
       </li>
@@ -38,10 +38,12 @@
       <li class="menu-header">Sistem Penunjang Keputusan</li>
       <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
-          <span>Layout</span></a>
+          <span>Copras</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('admin.kriteria.index') }}">Kriteria</a></li>
+          <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Sub Kriteria</a></li>
           <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Alternatif</a></li>
+          <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Penilaian</a></li>
           {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
         </ul>
       </li>

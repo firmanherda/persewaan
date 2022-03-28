@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\KriteriaController as AdminKriteriaController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\PesananController as AdminPesananController;
 use App\Http\Controllers\Admin\AlternatifController as AdminAlternatifController;
+use App\Http\Controllers\Admin\BarangSedangDisewaController as AdminBarangSedangDisewaController;
+use App\Http\Controllers\Admin\RiwayatTransaksiController as AdminRiwayatTransaksiController;
 use App\Http\Controllers\Admin\VerifikasiMemberController as AdminVerifikasiMemberController;
 
 
@@ -15,6 +17,9 @@ use App\Http\Controllers\User\KeranjangController as UserKeranjangController;
 use App\Http\Controllers\User\ProfilController as UserProfilController;
 use App\Http\Controllers\User\TransaksiController as UserTransaksiController;
 use App\Http\Controllers\User\VerifikasiMemberController as UserVerifikasiMemberController;
+use App\Http\Controllers\User\SedangDisewaController as UserSedangDisewaController;
+use App\Http\Controllers\User\RiwayatTransaksiController as UserRiwayatTransaksiController;
+use App\Http\Controllers\User\PesananController as UserPesananController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +48,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('pesanan', AdminPesananController::class, ['as' => 'admin']);
     Route::resource('kriteria', AdminKriteriaController::class, ['as' => 'admin']);
     Route::resource('alternatif', AdminAlternatifController::class, ['as' => 'admin']);
+    Route::resource('barangdisewa', AdminBarangSedangDisewaController::class, ['as' => 'admin']);
+    Route::resource('riwayattransaksi', AdminRiwayatTransaksiController::class, ['as' => 'admin']);
 });
 
 Route::name('user.')->group(function () {
@@ -51,6 +58,9 @@ Route::name('user.')->group(function () {
     Route::resource('barang', UserBarangController::class);
     Route::resource('keranjang', UserKeranjangController::class);
     Route::resource('transaksi', UserTransaksiController::class);
+    Route::resource('sedangdisewa', UserSedangDisewaController::class);
+    Route::resource('riwayattransaksi', UserRiwayatTransaksiController::class);
+    Route::resource('pesanan', UserPesananController::class);
 
     Route::prefix('profil')->group(function () {
         Route::resource('verifikasi', UserVerifikasiMemberController::class, ['as' => 'profil'])->except(['index', 'destroy']);

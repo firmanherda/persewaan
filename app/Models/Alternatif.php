@@ -9,7 +9,7 @@ class Alternatif extends Model
     // protected $fillable = ['nama', 'kode', 'bobot', 'jenis'];
     use HasFactory;
 
-    protected $table = 'alternatif';
+    protected $table = 'alternatifs';
 
     protected $guarded = [];
 }

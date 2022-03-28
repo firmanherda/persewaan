@@ -17,7 +17,7 @@ class AlternatifController extends Controller
     {
         $alternatif = Alternatif::all();
         // $alternatif = alternati
-        return view('admin.kriteria.index', ['kriteria' => $alternatif]);
+        return view('admin.alternatif.index', ['alternatif' => $alternatif]);
     }
 
     /**

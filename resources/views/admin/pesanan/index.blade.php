@@ -17,8 +17,37 @@
           <p class="card-text">{{ $pesanans->user_id }}</p>
         </div>
       </div> --}}
+      {{-- @if($pesanans->status== 'berhasil') --}}
       @foreach ($pesanans as $data)
-        <div class="row">
+      @if ($data->status_pembayaran == 'Menunggu Pembayaran')
+      <div class="row">
+        <p class="col-sm-2">Tanggal Order</p>
+        <div class="col-sm-10">
+          <p class="card-text">{{ $data->created_at }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="col-sm-2">Total Harga</p>
+        <div class="col-sm-10">
+          <p class="card-text">{{ $data->total_harga }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="col-sm-2">Tanggal Sewa</p>
+        <div class="col-sm-10">
+          <p class="card-text">{{ $data->tanggal_sewa }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <p class="col-sm-2">Tanggal Batas Kembali</p>
+        <div class="col-sm-10">
+          <p class="card-text">{{ $data->tanggal_batas_kembali }}</p>
+        </div>
+      </div>
+      @else
+      kosong
+      @endif
+        {{-- <div class="row">
           <p class="col-sm-2">Tanggal Order</p>
           <div class="col-sm-10">
             <p class="card-text">{{ $data->created_at }}</p>
@@ -41,19 +70,21 @@
           <div class="col-sm-10">
             <p class="card-text">{{ $data->tanggal_batas_kembali }}</p>
           </div>
-        </div>
+        </div> --}}
         <div class="row">
           <div class="d-inline-flex justify-content-between">
-            @if ($data->status == 'Menunggu Pembayaran')
+            @if ($data->status_pembayaran == 'Menunggu Pembayaran')
               <div><button class="btn btn-aksi btn-primary text-white" data-transaksi="{{ $data->id }}"
-                  data-aksi="Berhasil" data-customer="{{ $data->user->id }}" type="submit">Konfirmasi</button>
+                  data-aksi="Lunas" data-customer="{{ $data->user->id }}" type="submit">Konfirmasi</button>
                 <button class="btn btn-aksi btn-secondary text-dark" data-transaksi="{{ $data->id }}"
                   data-aksi="Ditolak" data-customer="{{ $data->user->id }}" type="submit">Tolak</button>
+                  <a href="{{ route('admin.pesanan.show', $data->id) }}" class="btn btn-primary align-self-lg-start">Detail</a>
               </div>
-            @else
-              <p>Transaksi {{ $data->status }}</p>
+            {{-- @else
+              <p>Transaksi {{ $data->status }}</p> --}}
             @endif
-            <a href="{{ route('admin.pesanan.show', $data->id) }}" class="btn btn-primary align-self-lg-start">Detail</a>
+            {{-- <a href="{{ route('admin.pesanan.show', $data->id) }}" class="btn btn-primary align-self-lg-start">Detail</a> --}}
+
           </div>
         </div>
         <hr>

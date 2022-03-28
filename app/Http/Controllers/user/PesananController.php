@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Models\Keranjang;
-use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
 
-class TransaksiController extends Controller
+class PesananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $pesananuser = Transaksi::where('status_pembayaran', 'Menunggu Pembayaran')->get();
+
+        return view('user.pesanan.index', compact('pesananuser'));
     }
 
     /**
@@ -48,7 +49,9 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        //
+        $pesananuser = Transaksi::with(['transaksiDetails.barang', 'user'])->find($id);
+
+        return view('user.pesanan.show', compact('pesananuser'));
     }
 
     /**
@@ -71,7 +74,7 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**

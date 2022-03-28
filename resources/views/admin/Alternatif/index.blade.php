@@ -26,8 +26,8 @@
                             <td>{{ $a->id }}</td>
                             <td>{{ $a->nama }}</td>
                             <td>
-                                <button class="btnDetailKriteria btn btn-sm btn-primary text-white"
-                    data-id="{{ $a->id }}">Detail</button>
+                                {{-- <button class="btnDetailAlternatif btn btn-sm btn-primary text-white"
+                    data-id="{{ $a->id }}">Detail</button> --}}
                     <button id="btnEditAlternatif" data-id="{{ $a->id }}"
                         class="btn btn-sm btn-secondary ms-1 text-white">Edit</button>
                     </td>
@@ -54,7 +54,7 @@
 </div>
 </div>
 </div>
-<div id="modalKriteria" class="modal fade" tabindex="-1">
+<div id="modalAlternatif" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
 

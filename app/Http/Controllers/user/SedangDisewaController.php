@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Barang;
-use App\Models\Keranjang;
-use App\Models\Transaksi;
-use App\Models\TransaksiDetail;
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 
-class PesananController extends Controller
+class SedangDisewaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +16,10 @@ class PesananController extends Controller
      */
     public function index()
     {
-        // $pesanans = Transaksi::get();
-        $pesanans = Transaksi::where('status_pembayaran','Menunggu Pembayaran')->get();
-        //dd($pesanans);
-        // $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
-        return view('admin.pesanan.index', compact('pesanans'));
+
+        $sd = Transaksi::where('status_transaksi','Belum Dikembalikan')->where('user_id',Auth::id())->get();
+
+        return view('user.sedangdisewa.index', compact('sd'));
     }
 
     /**
@@ -54,9 +51,7 @@ class PesananController extends Controller
      */
     public function show($id)
     {
-        $transaksi = Transaksi::with(['transaksiDetails.barang', 'user'])->find($id);
-
-        return view('admin.pesanan.show', compact('transaksi'));
+        //
     }
 
     /**
@@ -67,9 +62,7 @@ class PesananController extends Controller
      */
     public function edit($id)
     {
-        $transaksiDetail = TransaksiDetail::find($id);
-
-        return response()->json($transaksiDetail);
+        //
     }
 
     /**
@@ -81,22 +74,7 @@ class PesananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transaksi = Transaksi::find($id);
-        $transaksi->update(['status_pembayaran' => $request->aksi]);
-
-
-        if ($request->aksi == 'Lunas') {
-            $transaksiDetails = $transaksi->transaksiDetails;
-            $transaksi->update(['status_transaksi'=> 'Belum Dikembalikan    ']);
-            foreach ($transaksiDetails as $detail) {
-                $barang = Barang::find($detail->barang_id);
-                $barang->update(['stok' => $barang->stok - 1]);
-            }
-        } else if ($request->aksi == 'Ditolak') {
-            $transaksi->transaksiDetails()->delete();
-        }
-
-        return redirect()->route('admin.pesanan.index');
+        //
     }
 
     /**

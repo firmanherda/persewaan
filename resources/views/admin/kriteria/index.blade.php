@@ -18,7 +18,6 @@
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Kode</th>
-                            <th>Bobot</th>
                             <th>Jenis</th>
                             <th></th>
                         </tr>
@@ -29,7 +28,6 @@
                             <td>{{ $m->id }}</td>
                             <td>{{ $m->nama }}</td>
                             <td>{{ $m->kode }}</td>
-                            <td>{{ $m->bobot}}</td>
                             <td>{{ $m->jenis}}</td>
                             <td>
                                 {{-- <button class="btnDetailKriteria btn btn-sm btn-primary text-white"
@@ -128,10 +126,6 @@
           },
           {
             name: 'Kode',
-            orderable: true
-          },
-          {
-            name: 'Bobot',
             orderable: true
           },
           {

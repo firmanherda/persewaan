@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('user.app')
 @section('content')
 
 @section('css')
@@ -18,7 +18,6 @@
       <table class="table" id="tableBarangSedangDisewa" width="100%">
         <thead>
           <tr>
-            <th>No</th>
             <th>Nama</th>
             <th>Tanggal Sewa</th>
             <th>Batas Pengembalian</th>
@@ -27,9 +26,8 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($bsd as $b)
+          @foreach ($sd as $b)
             <tr class="listBarangSedangDisewa">
-              <td> {{ $b->user->id }}</td>
               <td>{{ $b->user->nama }}</td>
               <td>{{ $b->tanggal_sewa }}</td>
               <td>{{ $b->tanggal_batas_kembali }}</td>
@@ -39,15 +37,8 @@
                 {{-- <a href="{{ route('barang.edit', ['barang' => $b->id]) }}"
                                     class="badge badge-success badge-sm">Edit</a>
                                 <br> --}}
-                {{-- <button id="btnEditBarangSedangDisewa" data-id="{{ $b->id }}"
-                  class="btn btn-sm btn-secondary ms-1 text-white">Detail</button> --}}
-                  <a href="{{ route('admin.barangdisewa.show', $b->id) }}" class="btn btn-primary align-self-lg-start">Detail</a>
-                {{-- <form action="{{ route('admin.barang.destroy', $b->id) }}" method="POST">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
-                  {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
-                {{-- </form> --}}
+                <button id="btnEditBarangSedangDisewa" data-id="{{ $b->id }}"
+                  class="btn btn-primary align-self-lg-start">Detail</button>
               </td>
               {{-- <a href="{{route('barang.show'), [barang=>$b->id]}}" class="badge badge-succes badge-sm">Detail</a> --}}
 
@@ -56,7 +47,7 @@
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
+      <a href="{{ route('user.home') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
 </div>
@@ -87,6 +78,15 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
+    // $('#btnTambahBarang').click(function() {
+    //   $('#modalBarangSedangDisewa').modal('show');
+    //   $('#modalBarangSedangDisewaContent').html('');
+    //   $('#modalLoading').show();
+    //   $.get(`barangSedangDisewa/create`, function(res) {
+    //     $('#modalLoading').hide();
+    //     $('#modalBarangContent').html(res);
+    //   });
+    // });
     $('.listBarangSedangDisewa #btnEditBarangSedangDisewa').click(function() {
       const id = $(this).data('id');
       $('#modalBarangSedangDisewa').modal('show');
@@ -112,10 +112,6 @@
         url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json'
       },
       columns: [{
-          name: 'No',
-          orderable: true
-        },
-        {
           name: 'Nama',
           orderable: true
         },

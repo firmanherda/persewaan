@@ -41,12 +41,11 @@ class KriteriaController extends Controller
         $kriteria = Kriteria::create([
             'nama' => $request->nama,
             'kode' => $request->kode,
-            'bobot' => $request->bobot,
             'jenis' => $request->jenis,
         ]);
 
 
-        return redirect()->route('admin.kriteria');
+        return redirect()->route('admin.kriteria.index');
     }
 
     /**
@@ -68,7 +67,8 @@ class KriteriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kriteria = Kriteria::find($id);
+        return view('admin.kriteria.edit', ['kriteria' => $kriteria]);
     }
 
     /**

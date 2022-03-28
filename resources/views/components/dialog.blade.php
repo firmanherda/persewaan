@@ -13,9 +13,12 @@
       <div class="modal-body" id="dialogBody">
         {{ $body }}
       </div>
+      @if (isset($footer))
       <div class="modal-footer">
         {{ $footer }}
       </div>
+      @endif
+
     </div>
   </div>
 </div>

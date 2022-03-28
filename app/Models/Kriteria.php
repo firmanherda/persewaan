@@ -10,7 +10,9 @@ class Kriteria extends Model
     // protected $fillable = ['nama', 'kode', 'bobot', 'jenis'];
 
 
-    protected $table = 'kriteria';
+    protected $table = 'kriterias';
 
     protected $guarded = [];
+
+    public $timestamps = false;
 }

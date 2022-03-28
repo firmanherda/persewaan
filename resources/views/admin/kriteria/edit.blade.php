@@ -16,10 +16,6 @@
       <input type="text" name="kode" class="form-control" id="kode" value="{{ $kriteria->kode }}">
     </div>
     <div class="mb-3">
-      <label for="bobot" class="form-label">Bobot</label>
-      <input type="text" name="bobot" class="form-control" id="bobot" value="{{ $kriteria->bobot }}">
-    </div>
-    <div class="mb-3">
       <label for="jenis" class="form-label">Jenis</label>
       <input type="text" name="jenis" class="form-control" id="jenis" value="{{ $kriteria->jenis }}">
     </div>

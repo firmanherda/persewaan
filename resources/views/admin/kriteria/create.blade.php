@@ -34,14 +34,6 @@
       </div>
       <br>
       <div class="form-group">
-          <label class="control-label col-sm-2" for="bobot">Bobot :</label>
-          <div class="col-sm-10">
-              <input type="text" class="form-control" id="bobot" placeholder="Tulis Bobot"
-                  name="bobot">
-          </div>
-      </div>
-      <br>
-      <div class="form-group">
           <label class="control-label col-sm-2" for="jenis">Jenis : </label>
           <div class="col-sm-10">
               <input type="text" class="form-control" id="jenis" placeholder="Tulis Jenis"

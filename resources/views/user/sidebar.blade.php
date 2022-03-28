@@ -34,19 +34,19 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('user.pesanan.index') }}">
           <i class="far fa-clock"></i>
           <span>Pesanan</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('user.sedangdisewa.index') }}">
           <i class="fas fa-receipt"></i>
           <span>Sedang disewa</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('user.riwayattransaksi.index') }}">
           <i class="far fa-clock"></i>
           <span>Riwayat Pesanan</span>
         </a>
