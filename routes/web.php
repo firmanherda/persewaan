@@ -20,7 +20,12 @@ use App\Http\Controllers\User\VerifikasiMemberController as UserVerifikasiMember
 use App\Http\Controllers\User\SedangDisewaController as UserSedangDisewaController;
 use App\Http\Controllers\User\RiwayatTransaksiController as UserRiwayatTransaksiController;
 use App\Http\Controllers\User\PesananController as UserPesananController;
+use App\Models\Barang;
+use App\Models\Transaksi;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +38,79 @@ use Illuminate\Support\Facades\Route;
 | contains the 'web' middleware group. Now create something great!
 |yes
 */
+
+Route::get('/cek', function() {
+    $tanggalMulai = Carbon::parse('2022-03-25')->format('Y-m-d');
+    $tanggalAkhir = Carbon::parse('2022-03-31')->format('Y-m-d');
+
+    // $stok = Barang::find($id)->stok;
+    $bookingsMulaiSewa = DB::table('barang_stok')
+        ->select('transaksis.*')
+        ->leftJoin('transaksi_details', 'transaksi_details.transaksi_id', '=', 'transaksis.id')
+        ->whereIn('transaksi_details.barang_id', [1, 2])
+        ->where(function ($q) use ($tanggalMulai) {
+            return $q->where([
+                ['transaksis.tanggal_sewa', '<=', $tanggalMulai],
+                ['transaksis.tanggal_batas_kembali', '>=', $tanggalMulai],
+            ]);
+        })
+        ->orWhere(function ($q) use ($tanggalAkhir) {
+            return $q->where([
+                ['transaksis.tanggal_sewa', '<=', $tanggalAkhir],
+                ['transaksis.tanggal_batas_kembali', '>=', $tanggalAkhir]
+            ]);
+        })
+        ->groupBy('transaksis.id')
+        ->toSql();
+    // $stok -= $bookingsMulaiSewa;
+
+    dd($bookingsMulaiSewa);
+});
+
+Route::get('cek2', function () {
+    $jumlahfix = [];
+    $sewa = DB::table('barang_stok')
+        ->select('barang_id', 'jumlah_disewa')
+        ->where([
+            ['tanggal', '>=', '2022-03-27'],
+            ['tanggal', '<=', '2022-03-30']
+        ])
+        ->distinct()
+        ->get();
+
+    foreach ($sewa as $s) {
+        if (!in_array($s, $jumlahfix)) {
+            array_push($jumlahfix, $s);
+        }
+    }
+
+    $jumlahfix = collect($jumlahfix)->groupBy('barang_id');
+    $test = [];
+    foreach ($jumlahfix as $id => $j) {
+        $c = collect($j);
+        $test[$id] = $c->sum('jumlah_disewa');
+    }
+
+    dd($test);
+
+    $barangs = Barang::query()
+        ->when(count($sewa) >= 1,
+            function ($q) use ($sewa) {
+                return $q->whereIn('id', $sewa->map(fn($s) => $s->id));
+            }
+        )
+        ->get();
+
+    foreach($barangs as $barang) {
+        foreach ($sewa as $s) {
+            if ($s->id == $barang->id) {
+                $barang->stok = $barang->stok - $s->jumlah;
+            }
+        }
+    }
+
+    dd($barangs->map(fn($b) => ['id' => $b->id, 'stok' => $b->stok]));
+});
 
 Route::get('/', function () {
     return view('welcome');
