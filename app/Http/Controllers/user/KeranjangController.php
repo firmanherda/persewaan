@@ -59,10 +59,7 @@ class KeranjangController extends Controller
                 ]);
             }
 
-            return redirect()->route('user.keranjang.index')->with([
-                'status' => 'OK',
-                'msg' => 'Barang telah ditambahkan ke keranjang'
-            ]);
+            return redirect()->back();
         } catch (Throwable $e) {
             return redirect()->back()->withErrors("Barang gagal ditambahkan ke keranjang; {$e->getMessage()}");
         }

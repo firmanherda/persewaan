@@ -11,7 +11,7 @@ class Keranjang extends Model
 
     public function getCheckoutableAttribute()
     {
-        return $this->attributes['jumlah'] < $this->barang->stok;
+        return $this->attributes['jumlah'] <= $this->barang->stok;
     }
 
     public function user()

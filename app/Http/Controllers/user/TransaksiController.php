@@ -64,7 +64,7 @@ class TransaksiController extends Controller
             }
 
             if (!$checkout) {
-                return redirect()->route('user.keranjang.index')->withErrors(['status' => 'Stok barang tidak mencukupi']);
+                return redirect()->back()->withErrors(['status' => 'Stok barang tidak mencukupi']);
             }
 
             $transaksi = Transaksi::create([

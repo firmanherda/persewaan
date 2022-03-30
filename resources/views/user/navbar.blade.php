@@ -16,7 +16,12 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
   <ul class="navbar-nav navbar-right">
     <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown"
         class="nav-link notification-toggle nav-link-lg beep"><i class="fas fa-shopping-bag"></i></a>
-      <div class="dropdown-menu dropdown-list dropdown-menu-end">
+      <form id="form-checkout" class="dropdown-menu dropdown-list dropdown-menu-end"
+        action="{{ route('user.transaksi.store') }}" method="POST">
+        @csrf
+        <input class="d-none" type="date" name="tanggal_sewa" value="{{ request()->tanggal_sewa }}">
+        <input class="d-none" type="date" name="tanggal_batas_kembali"
+          value="{{ request()->tanggal_batas_kembali }}">
         <div class="dropdown-header">
           <p>Keranjang</p>
         </div>
@@ -36,9 +41,9 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
           @endforelse
         </div>
         <div class="dropdown-footer text-center">
-          <a href="{{ route('user.keranjang.index') }}">Checkout <i class="fas fa-chevron-right"></i></a>
+          <button id="btnCheckout" type="submit" class="btn btn-primary">Checkout</button>
         </div>
-      </div>
+      </form>
     </li>
     <li class="dropdown">
       <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">

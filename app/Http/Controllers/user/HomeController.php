@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,12 +15,41 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $jumlahfix = [];
         $barangs = Barang::all();
-        // $users = Auth::user();
-        return view('user.home' , ['barangs' => $barangs,]);
 
+        if ($request->tanggal_sewa && $request->tanggal_batas_kembali) {
+
+            // cari jumlah barang yang disewa diantara 2 tanggal
+            $sewa = DB::table('barang_tanggals')
+                ->select('barang_id', 'transaksi_id', 'jumlah_disewa')
+                ->where([
+                    ['tanggal', '>=', $request->tanggal_sewa],
+                    ['tanggal', '<=', $request->tanggal_batas_kembali]
+                ])
+                ->distinct()
+                ->get();
+
+            foreach ($sewa as $s) {
+                if (!in_array($s, $jumlahfix)) {
+                    array_push($jumlahfix, $s);
+                }
+            }
+
+            $jumlahfix = collect($jumlahfix)->groupBy('barang_id');
+
+            // kalo id barang == barang_id di barang_tanggals, stok dikurang
+            foreach ($barangs as $barang) {
+                foreach ($sewa as $s) {
+                    if ($s->barang_id == $barang->id) {
+                        $barang->stok = $barang->stok - $s->jumlah_disewa;
+                    }
+                }
+            }
+        }
+        return view('user.home', ['barangs' => $barangs,]);
     }
 
     /**

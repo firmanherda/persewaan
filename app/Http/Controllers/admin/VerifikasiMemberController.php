@@ -43,9 +43,9 @@ class VerifikasiMemberController extends Controller
      */
     public function show($id)
     {
-        $members = User::find($id);
+        $verifikasi = VerifikasiMember::firstWhere('user_id',$id);
 
-        return view('admin.verifikasimember.show', ['member' => $members]);
+        return view('admin.verifikasimember.show', ['member' => $verifikasi]);
     }
 
     /**
