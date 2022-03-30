@@ -1,4 +1,4 @@
-<form action="{{ route('member.update', $member->id) }}" method="POST">
+<form action="{{ route('admin.member.update', $member->id) }}" method="POST">
     <div class="modal-header">
       <h5 class="modal-title">Edit Member  </h5>
       <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>

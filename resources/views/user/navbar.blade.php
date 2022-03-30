@@ -1,9 +1,3 @@
-@php
-$keranjangs = \App\Models\Keranjang::with(['barang'])
-    ->where('user_id', auth()->id())
-    ->get();
-@endphp
-
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
   <form class="form-inline me-auto">
@@ -32,12 +26,13 @@ $keranjangs = \App\Models\Keranjang::with(['barang'])
                 <img src="{{ asset("storage/img/{$keranjang->barang->link_foto}") }}" height="100%" alt="">
               </div>
               <div class="dropdown-item-desc">
-                <div class="d-inline-block text-truncate">{{ $keranjang->barang->nama }}</div>
-                <div class="time text-primary">@rupiah($keranjang->barang->harga * $keranjang->jumlah)</div>
+                <p class="text-truncate">{{ $keranjang->barang->nama }}</p>
+                <p class="text-truncate">Jumlah: {{ $keranjang->jumlah }}</p>
+                <p class="time text-primary">@rupiah($keranjang->barang->harga * $keranjang->jumlah)</p>
               </div>
             </a>
           @empty
-            <p>Tidak ada item di keranjang</p>
+            <p class="mx-2">Tidak ada item di keranjang</p>
           @endforelse
         </div>
         <div class="dropdown-footer text-center">

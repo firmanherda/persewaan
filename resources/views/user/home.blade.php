@@ -8,12 +8,12 @@
         <i class="fa fa-exclamation-triangle me-2"></i>
         <span>{{ $message }}</span>
       </div>
-    </div>  
+    </div>
   @enderror
 
   <form action="{{ route('user.home') }}" method="GET">
-    <input type="date" name="tanggal_sewa" value="{{ request()->tanggal_sewa }}">
-    <input type="date" name="tanggal_batas_kembali" value="{{ request()->tanggal_batas_kembali }}">
+    <input type="date" name="tanggal_sewa" value="{{ request()->tanggal_sewa }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d'); }}">
+    <input type="date" name="tanggal_batas_kembali" value="{{ request()->tanggal_batas_kembali }}"  min="{{ \Carbon\Carbon::now()->format('Y-m-d'); }}">
     <button type="submit">Cari</button>
   </form>
 
@@ -77,6 +77,8 @@
 @push('scripts')
   <script>
     $(function() {
+      var barangs = @json($barangs);
+      var keranjangs = @json($keranjangs);
       var modal = $('#modalKeranjang');
 
       $('.btn-keranjang').each(function(i, v) {
@@ -113,6 +115,25 @@
         $('#subtotal').text("");
         $('#jumlah').prop('value', 1);
         $('#jumlah').unbind();
+      });
+
+      $('#form-checkout').on('submit', function(e) {
+        e.preventDefault();
+
+        var checkoutable = true;
+
+        barangs.forEach(function(barang) {
+          keranjangs.forEach(function(keranjang) {
+            if (keranjang.barang_id == barang.id && keranjang.jumlah > barang.stok) {
+              checkoutable = false
+            }
+          })
+        });
+
+        if (checkoutable) {
+          $(this).unbind();
+          $(this).submit();
+        }
       });
     });
   </script>

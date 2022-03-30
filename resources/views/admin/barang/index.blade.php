@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 <div class="container-fluid">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="d-sm-flex align-items-center justify-content-between my-4">
     <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Barang</h1>
     <button id="btnTambahBarang" class="d-sm-block btn btn-sm btn-primary shadow-sm">
       <i class="fas fa-plus fa-sm text-white-50"></i>
@@ -17,7 +17,6 @@
       <h6 class="m-0 font-weight-bold text-primary"> Barang Persewaan </h6>
     </div>
     <div class="card-body">
-
 
       <table class="table" id="tableBarang" width="100%">
         <thead>
@@ -34,7 +33,6 @@
         <tbody>
           @foreach ($barangs as $b)
             <tr class="listBarang">
-
               <td>{{ $b->id }}</td>
               <td>{{ $b->nama }}</td>
               <td><img height="100" src="{{ asset("storage/img/{$b->link_foto}") }}"></td>
@@ -42,27 +40,21 @@
               <td>@rupiah($b->harga)</td>
               <td>{{ $b->stok }}</td>
               <td>
-                <br>
-                {{-- <a href="{{ route('barang.edit', ['barang' => $b->id]) }}"
-                                    class="badge badge-success badge-sm">Edit</a>
-                                <br> --}}
-                <button id="btnEditBarang" data-id="{{ $b->id }}"
-                  class="btn btn-sm btn-secondary ms-1 text-white">Edit</button>
-                <form action="{{ route('admin.barang.destroy', $b->id) }}" method="POST">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
-                  {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
-                </form>
+                <div class="d-inline-flex justify-content-center align-items-center w-100">
+                  <button id="btnEditBarang" data-id="{{ $b->id }}"
+                    class="btn btn-sm btn-secondary text-white">Edit</button>
+                  <form action="{{ route('admin.barang.destroy', $b->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-danger ms-2 text-white"> Hapus </button>
+                  </form>
+                </div>
               </td>
-              {{-- <a href="{{route('barang.show'), [barang=>$b->id]}}" class="badge badge-succes badge-sm">Detail</a> --}}
-
               </td>
             </tr>
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
 </div>
@@ -145,9 +137,8 @@
           name: '',
           orderable: false
         }
-      ]
+      ],
     });
-
   });
 </script>
 @endpush

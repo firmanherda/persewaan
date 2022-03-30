@@ -1,13 +1,8 @@
 @extends('admin.app')
 @section('content')
-
   <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between my-4">
       <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Member</h1>
-      {{-- <button id="btnTambahMember" class="d-sm-block btn btn-sm btn-primary shadow-sm">
-          <i class="fas fa-plus fa-sm text-white-50"></i>
-          <span class="ms-1 text-white">Tambah Member</span>
-        </button> --}}
     </div>
     <div class="card shadow mb-3">
       <div class="card-body">
@@ -32,17 +27,16 @@
                   <td class="d-inline-flex justify-content-center w-100">
                     <button class="btnDetailVerifikasiMember btn btn-sm btn-secondary text-white"
                       data-id="{{ $m->id }}">Detail</button>
-                    <button class="btnAksi btn btn-sm btn-primary text-white mx-2"
-                      data-id="{{ $m->id }}" data-aksi="diterima">Terima</button>
-                    <button class="btnAksi btn btn-sm btn-danger text-white"
-                      data-id="{{ $m->id }}" data-aksi="ditolak">Tolak</button>
+                    <button class="btnAksi btn btn-sm btn-primary text-white mx-2" data-id="{{ $m->id }}"
+                      data-aksi="diterima">Terima</button>
+                    <button class="btnAksi btn btn-sm btn-danger text-white" data-id="{{ $m->id }}"
+                      data-aksi="ditolak">Tolak</button>
                   </td>
                 </tr>
               @endforeach
             </tbody>
           </table>
         </div>
-        <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 <div class="container-fluid">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="d-sm-flex align-items-center justify-content-between my-4">
     <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Riwayat Transaksi</h1>
   </div>
   <div class="card shadow mb-3">
@@ -13,8 +13,6 @@
       <h6 class="m-0 font-weight-bold text-primary">Riwayat Transaksi</h6>
     </div>
     <div class="card-body">
-
-
       <table class="table" id="tableRiwayatTransaksi" width="100%">
         <thead>
           <tr>
@@ -34,22 +32,13 @@
               <td>{{ $r->tanggal_batas_kembali }}</td>
               <td>
                 <br>
-                <a href="{{ route('admin.riwayattransaksi.show', $r->id) }}" class="text-center btn btn-primary align-self-lg-start text-center">Detail</a>
-                {{-- <form action="{{ route('admin.barang.destroy', $r->id) }}" method="POST">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
-                  {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
-                {{-- </form> --}}
-              </td>
-              {{-- <a href="{{route('barang.show'), [barang=>$r->id]}}" class="badge badge-succes badge-sm">Detail</a> --}}
-
+                <a href="{{ route('admin.riwayattransaksi.show', $r->id) }}"
+                  class="text-center btn btn-primary align-self-lg-start text-center">Detail</a>
               </td>
             </tr>
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
 </div>

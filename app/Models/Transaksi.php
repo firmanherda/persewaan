@@ -11,16 +11,7 @@ class Transaksi extends Model
 
     protected $table = 'transaksis';
 
-    protected $guarded = [];
-    // protected $fillable = [
-    //     'user_id',
-    //     'jumlah',
-    //     'status',
-    //     'total_harga',
-    //     'tanggal_sewa',
-    //     'tanggal_batas_kembali',
-
-    // ];
+    protected $guarded = ['id'];
 
     public function user()
     {
@@ -30,5 +21,10 @@ class Transaksi extends Model
     public function transaksiDetails()
     {
         return $this->hasMany(TransaksiDetail::class);
+    }
+
+    public function barangTanggals()
+    {
+        return $this->hasMany(BarangTanggal::class);
     }
 }

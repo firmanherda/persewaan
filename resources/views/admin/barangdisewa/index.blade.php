@@ -5,15 +5,15 @@
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 <div class="container-fluid">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Barang Sedang Disewa</h1>
+  <div class="d-sm-flex align-items-center justify-content-between my-4">
+    <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Barang Sedang Disewa
+    </h1>
   </div>
   <div class="card shadow mb-3">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Barang Sedang Disewa </h6>
     </div>
     <div class="card-body">
-
 
       <table class="table" id="tableBarangSedangDisewa" width="100%">
         <thead>
@@ -35,28 +35,13 @@
               <td>{{ $b->tanggal_batas_kembali }}</td>
               <td>{{ $b->status_transaksi }}</td>
               <td>
-                <br>
-                {{-- <a href="{{ route('barang.edit', ['barang' => $b->id]) }}"
-                                    class="badge badge-success badge-sm">Edit</a>
-                                <br> --}}
-                {{-- <button id="btnEditBarangSedangDisewa" data-id="{{ $b->id }}"
-                  class="btn btn-sm btn-secondary ms-1 text-white">Detail</button> --}}
-                  <a href="{{ route('admin.barangdisewa.show', $b->id) }}" class="btn btn-primary align-self-lg-start">Detail</a>
-                {{-- <form action="{{ route('admin.barang.destroy', $b->id) }}" method="POST">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
-                  {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
-                {{-- </form> --}}
-              </td>
-              {{-- <a href="{{route('barang.show'), [barang=>$b->id]}}" class="badge badge-succes badge-sm">Detail</a> --}}
-
+                <a href="{{ route('admin.barangdisewa.show', $b->id) }}"
+                  class="btn btn-primary align-self-lg-start">Detail</a>
               </td>
             </tr>
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
 </div>

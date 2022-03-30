@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 <div class="container-fluid">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="d-sm-flex align-items-center justify-content-between my-4">
     <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Pesanan</h1>
   </div>
   <div class="card shadow mb-3">
@@ -13,8 +13,6 @@
       <h6 class="m-0 font-weight-bold text-primary">Pesanan</h6>
     </div>
     <div class="card-body">
-
-
       <table class="table" id="tablePesanan" width="100%">
         <thead>
           <tr>
@@ -36,7 +34,8 @@
               <td>{{ $pu->status_pembayaran }}</td>
               <td>
                 <br>
-                  <a href="{{ route('user.pesanan.show', $pu->id) }}" class="btn btn-primary align-self-lg-start">Detail</a>
+                <a href="{{ route('user.pesanan.show', $pu->id) }}"
+                  class="btn btn-primary align-self-lg-start">Detail</a>
               </td>
 
               </td>
@@ -44,7 +43,6 @@
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('user.home') }}" class="btn btn-primary"> Back </a>
     </div>
   </div>
 </div>

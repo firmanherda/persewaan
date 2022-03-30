@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css" />
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body>
   <div id="app">
     @guest
       @yield('content')
@@ -26,7 +26,7 @@
 
     @auth
       <div class="main-wrapper">
-        @include('user.navbar')
+        @include('user.navbar', ['keranjangs' => $keranjangs])
         @include('user.sidebar')
         <div class="main-content" id="main-content">
           @yield('content')

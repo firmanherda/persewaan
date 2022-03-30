@@ -38,7 +38,6 @@
         </div>
       </div>
 
-
       <div class="row">
         <p class="col-sm-2">Status</p>
         <div class="col-sm-10">
@@ -56,15 +55,12 @@
         </div>
       </div>
 
-
       <div class="row">
         <p class="col-sm-2">Tanggal ter daftar</p>
         <div class="col-sm-10">
           <p class="card-text">: {{ $user->created_at }}</p>
         </div>
       </div>
-      <a href="{{ route('user.home') }}" class="btn btn-primary"> Back </a>
     </div>
-  </div>
   </div>
 @endsection

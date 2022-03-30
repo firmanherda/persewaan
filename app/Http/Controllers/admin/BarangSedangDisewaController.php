@@ -86,6 +86,7 @@ class BarangSedangDisewaController extends Controller
     {
         $transaksi = Transaksi::find($id);
         $total_harga = 0;
+
         foreach ($request->id as $key => $val) {
             $bsd = TransaksiDetail::find($val);
             $total_harga += $request->denda[$key];
@@ -101,6 +102,8 @@ class BarangSedangDisewaController extends Controller
             'tanggal_kembali' => Carbon::now(),//d-m-Y H:i:s
             'total_harga' => $total_harga + $transaksi->total_harga
         ]);
+
+        $transaksi->barangTanggals()->delete();
 
         return redirect()->back();
     }

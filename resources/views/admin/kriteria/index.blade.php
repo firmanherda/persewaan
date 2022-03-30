@@ -1,64 +1,48 @@
 @extends('admin.app')
 @section('content')
-
-<div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Kriteria</h1>
-        <button id="btnTambahKriteria" class="d-sm-block btn btn-sm btn-primary shadow-sm">
-          <i class="fas fa-plus fa-sm text-white-50"></i>
-          <span class="ms-1 text-white">Tambah Kriteria</span>
-        </button>
-      </div>
+  <div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between my-4">
+      <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Kriteria</h1>
+      <button id="btnTambahKriteria" class="d-sm-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-plus fa-sm text-white-50"></i>
+        <span class="ms-1 text-white">Tambah Kriteria</span>
+      </button>
+    </div>
     <div class="card shadow mb-3">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id ="tableKriteria" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Kode</th>
-                            <th>Jenis</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($kriteria as $m)
-                        <tr class="listKriteria">
-                            <td>{{ $m->id }}</td>
-                            <td>{{ $m->nama }}</td>
-                            <td>{{ $m->kode }}</td>
-                            <td>{{ $m->jenis}}</td>
-                            <td>
-                                {{-- <button class="btnDetailKriteria btn btn-sm btn-primary text-white"
-                    data-id="{{ $m->id }}">Detail</button> --}}
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="tableKriteria" class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Kode</th>
+                <th>Jenis</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($kriteria as $m)
+                <tr class="listKriteria">
+                  <td>{{ $m->id }}</td>
+                  <td>{{ $m->nama }}</td>
+                  <td>{{ $m->kode }}</td>
+                  <td>{{ $m->jenis }}</td>
+                  <td>
                     <button id="btnEditKriteria" data-id="{{ $m->id }}"
-                        class="btn btn-sm btn-secondary ms-1 text-white">Edit</button>
-                    </td>
-
-
-
-
-                                {{-- <form action="{{route('member.destroy', $m->id)}}" method="POST">
-                                    {{ method_field("DELETE")}}
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="badge badge-primary badge-sm"> Hapus </button>
-                                {{-- <a href="#" class="badge badge-primary badge-sm">Hapus</a> --}}
-                                {{-- </form> --}}
-
-                        </tr>
-                    @endforeach
-                    </tbody>
-
-        </table>
+                      class="btn btn-sm btn-secondary ms-1 text-white">Edit</button>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <a href="{{ route('homeadmin') }}" class="btn btn-primary"> Back </a>
-</div>
-    </div>
-</div>
-</div>
-</div>
-<div id="modalKriteria" class="modal fade" tabindex="-1">
+  </div>
+  </div>
+  </div>
+  <div id="modalKriteria" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -82,7 +66,7 @@
 @push('scripts')
   <script>
     $(document).ready(function() {
-        $('.listKriteria #btnEditKriteria').click(function() {
+      $('.listKriteria #btnEditKriteria').click(function() {
         const id = $(this).data('id');
         $('#modalKriteria').modal('show');
         $('#modalKriteriaContent').html('');
@@ -102,16 +86,16 @@
         });
       });
 
-    $('.listKriteria .btnDetailKriteria').click(function() {
-      const id = $(this).data('id');
-      $('#modalKriteria').modal('show');
-      $('#modalKriteriaContent').html('');
-      $('#modalLoading').show();
-      $.get(`kriteria/${id}`, function(res) {
-        $('#modalLoading').hide();
-        $('#modalKriteriaContent').html(res);
+      $('.listKriteria .btnDetailKriteria').click(function() {
+        const id = $(this).data('id');
+        $('#modalKriteria').modal('show');
+        $('#modalKriteriaContent').html('');
+        $('#modalLoading').show();
+        $.get(`kriteria/${id}`, function(res) {
+          $('#modalLoading').hide();
+          $('#modalKriteriaContent').html(res);
+        });
       });
-    });
       $('#tableKriteria').DataTable({
         language: {
           url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json'

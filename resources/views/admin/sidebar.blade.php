@@ -12,24 +12,22 @@
       <li class="nav-item">
         <a href="{{ route('homeadmin') }}" class="nav-link"><i
             class="fas fa-fire"></i><span>Home</span></a>
-      <li><a class="nav-link" href="{{ route('admin.member.index') }}"><i class="far fa-user  "></i>
+      <li><a class="nav-link" href="{{ route('admin.member.index') }}"><i class="fas fa-user  "></i>
           <span>Member</span></a></li>
       <li class="nav-item dropdown"s
-      <li><a class="nav-link" href="{{ route('admin.verifikasimember.index') }}"><i class="far fa-user  "></i>
+      <li><a class="nav-link" href="{{ route('admin.verifikasimember.index') }}"><i class="fas fa-user  "></i>
           <span>Verifikasi Member</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="fas fa-backpack"></i>
+      <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="fas fa-briefcase"></i>
           <span>Barang</span></a></li>
-      {{-- <li><a class="nav-link" href="#"><i class="far fa-user  "></i>
-          <span>Paket</span></a></li> --}}
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="{{ route('admin.pesanan.index') }}"><i class="far fa-envelope  "></i>
+      <li><a class="nav-link" href="{{ route('admin.pesanan.index') }}"><i class="fas fa-envelope  "></i>
           <span>Pesanan Masuk</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="{{ route('admin.barangdisewa.index') }}"><i class="far fa-bell  "></i>
+      <li><a class="nav-link" href="{{ route('admin.barangdisewa.index') }}"><i class="fas fa-bell  "></i>
           <span>Barang Sedang Disewa</span></a></li>
       <li class="nav-item dropdown">
-      <li><a class="nav-link" href="{{ route('admin.riwayattransaksi.index') }}"><i class="far fa-file  "></i>
+      <li><a class="nav-link" href="{{ route('admin.riwayattransaksi.index') }}"><i class="fas fa-file  "></i>
           <span>Riwayat Transaksi Selesai</span></a></li>
 
       </li>

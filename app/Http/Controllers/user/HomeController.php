@@ -4,9 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Barang;
 use App\Http\Controllers\Controller;
+use App\Models\BarangTanggal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,14 +23,12 @@ class HomeController extends Controller
         if ($request->tanggal_sewa && $request->tanggal_batas_kembali) {
 
             // cari jumlah barang yang disewa diantara 2 tanggal
-            $sewa = DB::table('barang_tanggals')
-                ->select('barang_id', 'transaksi_id', 'jumlah_disewa')
-                ->where([
+            $sewa = BarangTanggal::where([
                     ['tanggal', '>=', $request->tanggal_sewa],
                     ['tanggal', '<=', $request->tanggal_batas_kembali]
                 ])
                 ->distinct()
-                ->get();
+                ->get(['barang_id', 'transaksi_id', 'jumlah_disewa']);
 
             foreach ($sewa as $s) {
                 if (!in_array($s, $jumlahfix)) {

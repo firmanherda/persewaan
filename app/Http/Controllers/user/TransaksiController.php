@@ -7,8 +7,10 @@ use App\Models\Barang;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class TransaksiController extends Controller
@@ -79,6 +81,27 @@ class TransaksiController extends Controller
             $transaksi->update(['total_harga' => $transaksiDetails->sum('subtotal')]);
 
             Keranjang::where('user_id', Auth::id())->delete();
+
+            $barangTanggals = [];
+            $transaksiDetails = $transaksiDetails->groupBy('barang_id');
+            $period = CarbonPeriod::create($transaksi->tanggal_sewa, $transaksi->tanggal_batas_kembali);
+
+            foreach ($period as $tanggal) {
+                $bt = $transaksiDetails
+                    ->map(fn ($td, $key) => [
+                        'barang_id' => $key,
+                        'transaksi_id' => $td[0]->transaksi_id,
+                        'jumlah_disewa' => $td->count(),
+                        'tanggal' => $tanggal->format('Y-m-d')
+                    ])
+                    ->values()
+                    ->toArray();
+                $barangTanggals = array_merge($barangTanggals, $bt);
+            }
+
+            // dd($barangTanggals);
+
+            DB::table('barang_tanggals')->insert($barangTanggals);
 
             return redirect()->route('user.home');
         } catch (Throwable $e) {
