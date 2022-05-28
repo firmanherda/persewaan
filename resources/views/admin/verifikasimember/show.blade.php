@@ -1,7 +1,5 @@
 <div class="modal-header">
     <h5 class="modal-title">Detail Verifikasi Member</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
       </button>
 
   </div>
@@ -14,13 +12,13 @@
     </div>
     <div class="mx-2 mb-3">
       <div class="row">
-        <dt class="col-4">Email</dt>
+        <dt class="col-4">Nomor Identitas</dt>
         <dd class="col-8">{{ $member->nomor_identitas }}</dd>
       </div>
     </div>
     <div class="mx-2 mb-3">
       <div class="row">
-        <dt class="col-4">Alamat</dt>
+        <dt class="col-4">Alamat Identitas</dt>
         <dd class="col-8">{{ $member->alamat_identitas }}</dd>
       </div>
     </div>
@@ -32,8 +30,9 @@
     </div>
     <div class="mx-2 mb-3">
       <div class="row">
-        <dt class="col-4">Foto</dt>
+        <dt class="col-4">Foto Identitas (KTP,SIM,KK)</dt>
         <dd class="col-8">{{ $member->foto_identitas }}</dd>
+        <td><img width="100%" src="{{ asset("storage/img/identitas/{$member->foto_identitas}") }}"></td>
       </div>
     </div>
   <div class="modal-footer">

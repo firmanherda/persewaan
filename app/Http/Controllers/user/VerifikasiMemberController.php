@@ -40,7 +40,7 @@ class VerifikasiMemberController extends Controller
         ]);
 
         try {
-            Storage::putFileAs('img/identitas', $request->file('foto'), "{$verifikasi->id}.jpg");
+            Storage::putFileAs('public/img/identitas', $request->file('foto'), "{$verifikasi->id}.jpg");
             $verifikasi->update(['foto_identitas' => "{$verifikasi->id}.jpg"]);
 
             $user->update(['status' => 'menunggu']);

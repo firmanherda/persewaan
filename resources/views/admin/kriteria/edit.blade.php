@@ -1,6 +1,6 @@
 <form action="{{ route('admin.kriteria.update', $kriteria->id) }}" method="POST">
   <div class="modal-header">
-    <h5 class="modal-title">Edit Barang   </h5>
+    <h5 class="modal-title">Edit Kriteria   </h5>
     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   {{-- echo tes; --}}

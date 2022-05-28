@@ -16,6 +16,7 @@
               <tr>
                 <th>ID</th>
                 <th>Nama</th>
+
                 <th></th>
               </tr>
             </thead>
@@ -24,6 +25,7 @@
                 <tr class="listAlternatif">
                   <td>{{ $a->id }}</td>
                   <td>{{ $a->nama }}</td>
+
                   <td>
                     <button id="btnEditAlternatif" data-id="{{ $a->id }}"
                       class="btn btn-sm btn-secondary ms-1 text-white">Edit</button>
@@ -82,16 +84,6 @@
         });
       });
 
-      $('.listAlternatif .btnDetailAlternatif').click(function() {
-        const id = $(this).data('id');
-        $('#modalAlternatif').modal('show');
-        $('#modalAlternatifContent').html('');
-        $('#modalLoading').show();
-        $.get(`alternatif/${id}`, function(res) {
-          $('#modalLoading').hide();
-          $('#modalAlternatifContent').html(res);
-        });
-      });
       $('#tableAlternatif').DataTable({
         language: {
           url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json'

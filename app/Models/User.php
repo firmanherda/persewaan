@@ -46,11 +46,20 @@ class User extends Authenticatable
 
     public function keranjangs()
     {
-        return $this->hasMany(Keranjang::class);
+        return $this->hasOne(Keranjang::class);
+    }
+
+    public function keranjangDetails()
+    {
+        return $this->hasManyThrough(KeranjangDetail::class, Keranjang::class);
     }
 
     public function transaksis()
     {
         return $this->hasMany(transaksis::class);
+    }
+    public function userDetail()
+    {
+        return $this->hasOne(UserDetail::class);
     }
 }

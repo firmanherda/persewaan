@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Barang;
 use App\Http\Controllers\Controller;
 use App\Models\BarangTanggal;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,10 +20,9 @@ class HomeController extends Controller
     {
         $jumlahfix = [];
         $barangs = Barang::all();
+        $keranjang = Keranjang::with(['keranjangDetails.barang'])->firstWhere('user_id', Auth::id());
 
         if ($request->tanggal_sewa && $request->tanggal_batas_kembali) {
-
-            // cari jumlah barang yang disewa diantara 2 tanggal
             $sewa = BarangTanggal::where([
                     ['tanggal', '>=', $request->tanggal_sewa],
                     ['tanggal', '<=', $request->tanggal_batas_kembali]
@@ -38,7 +38,7 @@ class HomeController extends Controller
 
             $jumlahfix = collect($jumlahfix)->groupBy('barang_id');
 
-            // kalo id barang == barang_id di barang_tanggals, stok dikurang
+
             foreach ($barangs as $barang) {
                 foreach ($sewa as $s) {
                     if ($s->barang_id == $barang->id) {
@@ -47,7 +47,7 @@ class HomeController extends Controller
                 }
             }
         }
-        return view('user.home', ['barangs' => $barangs,]);
+        return view('user.home', compact('barangs', 'keranjang'));
     }
 
     /**
@@ -81,7 +81,7 @@ class HomeController extends Controller
     {
         $barangs = Barang::find($id);
         $users = Auth::user();
-        return view('user.showbarang', ['barang' => $barangs, 'users' => $users]);
+        return view('user.showbarang', ['barang' => $barangs, 'users' => $users])->with('success', 'Barang telah ditambah kedalam keranjang');
     }
 
     /**

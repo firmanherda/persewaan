@@ -1,12 +1,21 @@
 @extends('admin.app')
 
 @section('content')
+
   <div class="card w-100 mt-4">
     <div class="card-header">
-      <h2 class="card-title">Detail Pesanan</h2>
+      <h2 class="card-title">Detail Pesanan Masuk</h2>
     </div>
     <div class="card-body container-fluid">
       <div class="container-fluid mx-auto h5">
+      {{-- <div class="row justify-content-center">
+          <div class="col-5 col-md-2 pe-1 text-end">ID Transaksi: </div>
+          <div class="col-7 col-md-4 ps-1 fw-bold">{{ $transaksi->id }}</div>
+        </div> --}}
+        <div class="row justify-content-center">
+          <div class="col-5 col-md-2 pe-1 text-end">ID User: </div>
+          <div class="col-7 col-md-4 ps-1 fw-bold">{{ $transaksi->user->id }}</div>
+        </div>
         <div class="row justify-content-center">
           <div class="col-5 col-md-2 pe-1 text-end">Nama: </div>
           <div class="col-7 col-md-4 ps-1 fw-bold">{{ $transaksi->user->nama }}</div>
@@ -20,16 +29,22 @@
           <div class="col-7 col-md-4 ps-1 fw-bold">{{ $transaksi->user->no_hp }}</div>
         </div>
         <div class="row justify-content-center mt-2">
+          {{-- <div class="col-5 col-md-2 pe-1 text-end">Durasi Sewa</div>
+          <div class="col-7 col-md-4 ps-1 fw-bold">{{($lamaSewa)}} Hari</div>
+        </div>
+        <div class="row justify-content-center mt-2">
           <div class="col-5 col-md-2 pe-1 text-end">Total: </div>
           <div class="col-7 col-md-4 ps-1 fw-bold">@rupiah($transaksi->total_harga)</div>
-        </div>
+        </div> --}}
       </div>
+
 
       <table class="table table-bordered w-100 mt-5">
         <thead>
           <tr>
             <th>No.</th>
             <th>Barang</th>
+            <th>Harga</th>
             {{-- <th>Status</th>
             <th>Denda</th>
             <th>Aksi</th> --}}
@@ -40,6 +55,7 @@
             <tr>
               <td>{{ $loop->iteration }}</td>
               <td>{{ $td->barang->nama }}</td>
+              <td>{{ $td->barang->harga }}</td>
               {{-- <td>{{ $td->status ?: '-' }}</td>
               <td>{{ $td->denda ?: '-' }}</td>
               <td class="text-center">

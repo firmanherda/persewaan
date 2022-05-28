@@ -2,7 +2,7 @@
 @section('content')
   <form action="{{ route('user.profil.verifikasi.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <h3 class="text-white mb-4" class="text-center">Verifikasi Member</h3>
+    <h3 class="text-gray mb-4" class="text-center">Verifikasi Member</h3>
     <div class="card" style="border-radius: 15px;">
       <div class="card-body">
         <div class="row align-items-center pt-4 pb-3">

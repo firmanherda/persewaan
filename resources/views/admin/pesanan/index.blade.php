@@ -1,5 +1,10 @@
 @extends('admin.app')
 @section('content')
+{{-- @php
+$tanggal_sewa = \Carbon\Carbon::parse($data->tanggal_sewa);
+$tanggal_batas_kembali = \Carbon\Carbon::parse($data->tanggal_batas_kembali);
+$lamaSewa = $tanggal_sewa->diffInDays($tanggal_batas_kembali);
+@endphp --}}
   <div class="container-fluid">
     <p class="h3 my-4 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Pesanan Masuk</p>
 
@@ -12,9 +17,15 @@
         <div class="card w-100">
           <div class="card-body">
             <div class="row">
+              <p class="col-sm-2">ID Transaksi</p>
+              <div class="col-sm-10">
+                <p class="card-text">{{ $data->id }}</p>
+              </div>
+            </div>
+            <div class="row">
               <p class="col-sm-2">Tanggal Order</p>
               <div class="col-sm-10">
-                <p class="card-text">{{ $data->created_at }}</p>
+                <p class="card-text">{{ \Carbon\Carbon::parse($data->created_at)->format('d M Y H:i:s') }}</p>
               </div>
             </div>
             <div class="row">
@@ -23,16 +34,22 @@
                 <p class="card-text">{{ $data->total_harga }}</p>
               </div>
             </div>
+            {{-- <div class="row">
+              <p class="col-sm-2">Durasi Sewa/p>
+              <div class="col-sm-10">
+                <p class="card-text">{{$lamaSewa }} Hari</p>
+              </div>
+            </div> --}}
             <div class="row">
               <p class="col-sm-2">Tanggal Sewa</p>
               <div class="col-sm-10">
-                <p class="card-text">{{ $data->tanggal_sewa }}</p>
+                <p class="card-text">{{ \Carbon\Carbon::parse($data->tanggal_sewa)->format('d M Y') }}</p>
               </div>
             </div>
             <div class="row">
               <p class="col-sm-2">Tanggal Batas Kembali</p>
               <div class="col-sm-10">
-                <p class="card-text">{{ $data->tanggal_batas_kembali }}</p>
+                <p class="card-text">{{ \Carbon\Carbon::parse($data->tanggal_batas_kembali)->format('d M Y') }}</p>
               </div>
             </div>
             <div class="row">

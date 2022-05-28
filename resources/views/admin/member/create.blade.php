@@ -1,4 +1,4 @@
-<form action="{{ route('member.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.member.store') }}" method="POST" enctype="multipart/form-data">
     <div class="modal-header">
       <h5 class="modal-title">Tambah Member</h5>
       <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -7,23 +7,23 @@
       @csrf
       <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
-        <input type="text" name="nama" class="form-control" id="nama">
+        <input type="text" name="nama" class="form-control" id="nama"required autocomplete="nama">
       </div>
       <div class="mb-3">
         <label for="nama" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email">
+        <input type="email" name="email" class="form-control" id="email"required autocomplete="email">
       </div>
       <div class="mb-3">
         <label for="nama" class="form-label">No. HP</label>
-        <input type="tel" name="no_hp" class="form-control" id="hp">
+        <input type="tel" name="no_hp" class="form-control" id="hp"required autocomplete="no_hp">
       </div>
       <div class="mb-3">
         <label for="text" class="form-label">Alamat</label>
-        <input type="text" name="alamat" class="form-control" id="deskripsi">
+        <input type="text" name="alamat" class="form-control" id="alamat"required autocomplete="alamat">
       </div>
       <div class="mb-3">
         <label for="nama" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" id="password">
+        <input type="password" name="password" class="form-control" id="password"required autocomplete="password">
       </div>
     </div>
     <div class="modal-footer">

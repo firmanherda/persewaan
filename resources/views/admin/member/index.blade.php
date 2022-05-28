@@ -27,7 +27,7 @@
                   <td>{{ $m->id }}</td>
                   <td>{{ $m->nama }}</td>
                   <td>{{ $m->email }}</td>
-                  <td>{{ $m->status }}</td>>
+                  <td>{{ $m->status }}</td>
                   <td>
                     <button class="btnDetailMember btn btn-sm btn-primary text-white"
                       data-id="{{ $m->id }}">Detail</button>

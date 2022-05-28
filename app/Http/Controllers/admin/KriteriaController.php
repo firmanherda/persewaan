@@ -45,7 +45,7 @@ class KriteriaController extends Controller
         ]);
 
 
-        return redirect()->route('admin.kriteria.index');
+        return redirect()->route('admin.kriteria.index')->with('success','Kriteria telah ditambah');
     }
 
     /**
@@ -81,7 +81,14 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $kriteria = Kriteria::find($id);
-        return view('admin.kriteria.edit', ['kriteria' => $kriteria]);
+
+
+        $kriteria->update([
+            'nama' => $request->nama,
+            'kode' => $request->kode,
+            'jenis' => $request->jenis,
+        ]);
+        return redirect()->route('admin.kriteria.index')->with('success', 'Kriteria telah diupdate');
     }
 
     /**

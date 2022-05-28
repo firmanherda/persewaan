@@ -8,37 +8,39 @@
     </ul>
   </form>
   <ul class="navbar-nav navbar-right">
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown"
-        class="nav-link notification-toggle nav-link-lg beep"><i class="fas fa-shopping-bag"></i></a>
-      <form id="form-checkout" class="dropdown-menu dropdown-list dropdown-menu-end"
-        action="{{ route('user.transaksi.store') }}" method="POST">
-        @csrf
-        <input class="d-none" type="date" name="tanggal_sewa" value="{{ request()->tanggal_sewa }}">
-        <input class="d-none" type="date" name="tanggal_batas_kembali"
-          value="{{ request()->tanggal_batas_kembali }}">
-        <div class="dropdown-header">
-          <p>Keranjang</p>
-        </div>
-        <div class="dropdown-list-content dropdown-list-icons">
-          @forelse ($keranjangs as $keranjang)
+    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-bs-toggle="dropdown"
+        class="nav-link notification-toggle nav-link-lg beep"><i class="fas fa-shopping-bag"></i></a> --}}
+    {{-- <form id="form-checkout" class="dropdown-menu dropdown-list dropdown-menu-end"
+      action="{{ route('user.transaksi.store') }}" method="POST">
+      @csrf
+      <input class="d-none" type="date" name="tanggal_sewa" value="{{ request()->tanggal_sewa }}">
+      <input class="d-none" type="date" name="tanggal_batas_kembali"
+        value="{{ request()->tanggal_batas_kembali }}">
+      <div class="dropdown-header">
+        <p>Keranjang</p>
+      </div>
+      <div class="dropdown-list-content dropdown-list-icons">
+        @if ($keranjang)
+          @forelse ($keranjang->keranjangDetails as $k)
             <a href="#" class="dropdown-item dropdown-item-unread">
               <div class="dropdown-item-icon bg-primary text-white">
-                <img src="{{ asset("storage/img/{$keranjang->barang->link_foto}") }}" height="100%" alt="">
+                <img src="{{ asset("storage/img/{$k->barang->link_foto}") }}" height="100%" alt="">
               </div>
               <div class="dropdown-item-desc">
-                <p class="text-truncate">{{ $keranjang->barang->nama }}</p>
-                <p class="text-truncate">Jumlah: {{ $keranjang->jumlah }}</p>
-                <p class="time text-primary">@rupiah($keranjang->barang->harga * $keranjang->jumlah)</p>
+                <p class="text-truncate">{{ $k->barang->nama }}</p>
+                <p class="text-truncate">Jumlah: {{ $k->jumlah }}</p>
+                <p class="time text-primary">@rupiah($k->barang->harga * $k->jumlah)</p>
               </div>
             </a>
           @empty
             <p class="mx-2">Tidak ada item di keranjang</p>
           @endforelse
-        </div>
-        <div class="dropdown-footer text-center">
-          <button id="btnCheckout" type="submit" class="btn btn-primary">Checkout</button>
-        </div>
-      </form>
+        @endif
+      </div>
+      <div class="dropdown-footer text-center">
+        <button id="btnCheckout" type="submit" class="btn btn-primary">Checkout</button>
+      </div>
+    </form> --}}
     </li>
     <li class="dropdown">
       <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">

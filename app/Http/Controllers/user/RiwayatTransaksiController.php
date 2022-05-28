@@ -50,7 +50,10 @@ class RiwayatTransaksiController extends Controller
      */
     public function show($id)
     {
-        //
+        $riwayats = Transaksi::with(['transaksiDetails.barang','user'])->find($id);
+
+        return view('user.riwayattransaksi.show', compact('riwayats'));
+
     }
 
     /**

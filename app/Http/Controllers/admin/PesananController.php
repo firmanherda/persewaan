@@ -81,13 +81,15 @@ class PesananController extends Controller
 
 
         if ($request->aksi == 'Lunas') {
-            $transaksi->update(['status_transaksi' => 'Belum Dikembalikan']);
+            $transaksi->update(['status_pengambilan_barang' => 'Belum Diambil']);
+            return redirect()->route('admin.pesanan.index')->with('success', 'Pesanan Telah Diterima');
         } else if ($request->aksi == 'Ditolak') {
             $transaksi->transaksiDetails()->delete();
             $transaksi->barangTanggals()->delete();
+            return redirect()->route('admin.pesanan.index')->with('success', 'Pesanan Telah Ditolak');
         }
 
-        return redirect()->route('admin.pesanan.index');
+
     }
 
     /**

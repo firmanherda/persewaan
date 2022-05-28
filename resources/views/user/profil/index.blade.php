@@ -58,7 +58,7 @@
       <div class="row">
         <p class="col-sm-2">Tanggal ter daftar</p>
         <div class="col-sm-10">
-          <p class="card-text">: {{ $user->created_at }}</p>
+          <p class="card-text">: {{ \Carbon\Carbon::parse($user->created_at)->format('d M Y H:i:s') }}</p>
         </div>
       </div>
     </div>

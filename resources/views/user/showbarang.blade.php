@@ -11,7 +11,7 @@
         <div class="d-inline-flex align-content-center text-black">
           <a class="my-auto me-2 text-black" href="{{ route('user.home') }}"><i class="fa fa-arrow-left"
               style="font-size: 1.5em;"></i></a>
-          <span class="h2 fw-bold my-auto">Detail Barang</span>
+          <span class="h2 fw-bold my-auto">Details Barang</span>
         </div>
         <div class="row mt-4">
           <img class="col-12 col-md-6" width="100%" src="{{ asset("storage/img/{$barang->link_foto}") }}">

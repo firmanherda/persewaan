@@ -19,12 +19,9 @@ class CreateKeranjangsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('barang_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->integer('jumlah')->default(1);
-            $table->timestamps();
+           $table->date('tanggal_sewa');
+           $table->date('tanggal_batas_kembali');
+           $table->timestamps();
         });
     }
 

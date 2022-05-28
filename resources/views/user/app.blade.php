@@ -26,7 +26,7 @@
 
     @auth
       <div class="main-wrapper">
-        @include('user.navbar', ['keranjangs' => $keranjangs])
+        @include('user.navbar')
         @include('user.sidebar')
         <div class="main-content" id="main-content">
           @yield('content')

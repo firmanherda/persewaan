@@ -45,22 +45,26 @@ class TransaksiController extends Controller
     {
         try {
             $checkout = true;
-            $keranjangs = Keranjang::with('barang')->where('user_id', Auth::id())->get();
+            $keranjang = Keranjang::with('keranjangDetails.barang')->firstWhere('user_id', Auth::id());
             $transaksiDetails = [];
             $jumlah = 0;
 
-            foreach ($keranjangs as $keranjang) {
-                $jumlah += $keranjang->jumlah;
+            $tanggalSewa = Carbon::parse($keranjang->tanggal_sewa);
+            $tanggalKembali = Carbon::parse($keranjang->tanggal_batas_kembali);
+            $lamaSewa =$tanggalSewa->diffInDays($tanggalKembali);
 
-                for ($i = 0; $i < $keranjang->jumlah; $i++) {
-                    $newKeranjang = $keranjang;
-                    $newKeranjang->subtotal = $newKeranjang->barang->harga;
+            foreach ($keranjang->keranjangDetails as $k) {
+                $jumlah += $k->jumlah;
+
+                for ($i = 0; $i < $k->jumlah; $i++) {
+                    $newKeranjang = $k;
+                    $newKeranjang->subtotal = $newKeranjang->barang->harga * $lamaSewa;
                     unset($newKeranjang->id);
 
                     array_push($transaksiDetails, $newKeranjang->toArray());
                 }
 
-                if (!$keranjang->checkoutable) {
+                if (!$k->checkoutable) {
                     $checkout = false;
                 }
             }
@@ -71,10 +75,10 @@ class TransaksiController extends Controller
 
             $transaksi = Transaksi::create([
                 'user_id' => Auth::id(),
-                'total_harga' => $keranjangs->sum('subtotal'),
+                'total_harga' => $keranjang->keranjangDetails->sum('subtotal'),
                 'jumlah' => $jumlah,
-                'tanggal_sewa' => Carbon::parse($request->tanggal_sewa)->format('Y-m-d'),
-                'tanggal_batas_kembali'=> Carbon::parse($request->tanggal_batas_kembali)->format('Y-m-d'),
+                'tanggal_sewa' => Carbon::parse($keranjang->tanggal_sewa)->format('Y-m-d'),
+                'tanggal_batas_kembali'=> Carbon::parse($keranjang->tanggal_batas_kembali)->format('Y-m-d'),
             ]);
 
             $transaksiDetails = $transaksi->transaksiDetails()->createMany($transaksiDetails);
@@ -98,8 +102,6 @@ class TransaksiController extends Controller
                     ->toArray();
                 $barangTanggals = array_merge($barangTanggals, $bt);
             }
-
-            // dd($barangTanggals);
 
             DB::table('barang_tanggals')->insert($barangTanggals);
 

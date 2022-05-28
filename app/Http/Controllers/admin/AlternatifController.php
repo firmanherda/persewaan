@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Alternatif;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class AlternatifController extends Controller
@@ -16,7 +17,7 @@ class AlternatifController extends Controller
     public function index()
     {
         $alternatif = Alternatif::all();
-        // $alternatif = alternati
+
         return view('admin.alternatif.index', ['alternatif' => $alternatif]);
     }
 
@@ -27,7 +28,8 @@ class AlternatifController extends Controller
      */
     public function create()
     {
-        //
+        $alternatif = Alternatif::all();
+        return view('admin.alternatif.create' , ['alternatif' => $alternatif]);
     }
 
     /**
@@ -38,7 +40,10 @@ class AlternatifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alternatif = Alternatif::create([
+            'nama' => $request->nama,
+        ]);
+        return redirect()->route('admin.alternatif.index')->with('success','Alternatif telah ditambah');
     }
 
     /**
@@ -60,7 +65,8 @@ class AlternatifController extends Controller
      */
     public function edit($id)
     {
-        //
+        $alternatif = Alternatif::find($id);
+        return view('admin.alternatif.edit', ['alternatif' => $alternatif]);
     }
 
     /**
@@ -72,7 +78,12 @@ class AlternatifController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $alternatif = Alternatif::find($id);
+
+        $alternatif->update([
+            'nama' => $request->nama,
+        ]);
+        return view('admin.alternatif.index')->with('success', 'Alternatif telah diupdate');
     }
 
     /**

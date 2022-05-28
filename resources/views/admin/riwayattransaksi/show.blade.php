@@ -3,7 +3,7 @@
 @section('content')
   <div class="card w-100 mt-4">
     <div class="card-header">
-      <h2 class="card-title">Detail Pesanan</h2>
+      <h2 class="card-title">Detail Riwayat Transaksi</h2>
     </div>
     <div class="card-body container-fluid">
       <div class="container-fluid mx-auto h5">

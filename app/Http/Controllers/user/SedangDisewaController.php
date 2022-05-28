@@ -51,7 +51,9 @@ class SedangDisewaController extends Controller
      */
     public function show($id)
     {
-        //
+        $sd = Transaksi::with(['transaksiDetails.barang', 'user'])->find($id);
+
+        return view('user.sedangdisewa.show', compact('sd'));
     }
 
     /**

@@ -1,6 +1,7 @@
 @extends('admin.app')
 @section('content')
 
+  {{ session('status') }};
 @section('css')
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
@@ -25,6 +26,7 @@
             <th>Nama Barang</th>
             <th>Foto</th>
             <th>Kategori</th>
+            <th>Deskripsi</th>
             <th>Harga per hari</th>
             <th>Stock</th>
             <th></th>
@@ -37,6 +39,7 @@
               <td>{{ $b->nama }}</td>
               <td><img height="100" src="{{ asset("storage/img/{$b->link_foto}") }}"></td>
               <td>{{ $b->kategori->nama }}</td>
+              <td>{{ $b->deskripsi }}</td>
               <td>@rupiah($b->harga)</td>
               <td>{{ $b->stok }}</td>
               <td>
@@ -44,9 +47,16 @@
                   <button id="btnEditBarang" data-id="{{ $b->id }}"
                     class="btn btn-sm btn-secondary text-white">Edit</button>
                   <form action="{{ route('admin.barang.destroy', $b->id) }}" method="POST">
-                    @method('DELETE')
+                    {{-- @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-sm btn-danger ms-2 text-white"> Hapus </button>
+
+                    <button type="submit" class="btn btn-sm btn-danger ms-2 text-white"> Hapus </button> --}}
+                    @csrf
+                    @method("DELETE")
+                    <input type="submit" value="Hapus" class="btn btn-sm btn-danger"
+                      onclick="if(!confirm('Apakah anda yakin?')) return false;" />
+                  </form>
+
                   </form>
                 </div>
               </td>
@@ -104,6 +114,11 @@
         $('#modalBarangContent').html(res);
       });
     });
+    // $('#btnDeleteBarang').click(function(){
+    //   $('#modalBarang').modal('show');
+    //   $('#modalBarangContent').html('');
+    //   $('#modalLoading').show();
+    // });
     $('#tableBarang').DataTable({
       language: {
         url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json'

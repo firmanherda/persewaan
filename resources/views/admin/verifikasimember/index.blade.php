@@ -2,7 +2,7 @@
 @section('content')
   <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between my-4">
-      <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Member</h1>
+      <h1 class="h3 mb-0 text-gray-800 d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">Verifikasi Member</h1>
     </div>
     <div class="card shadow mb-3">
       <div class="card-body">
@@ -20,10 +20,10 @@
             <tbody>
               @foreach ($members as $m)
                 <tr class="listVerifikasiMember">
-                  <td>{{ $m->id }}</td>
-                  <td>{{ $m->nama }}</td>
-                  <td>{{ $m->email }}</td>
-                  <td>{{ $m->status }}</td>
+                  <td>{{ $m->user->id }}</td>
+                  <td>{{ $m->user->nama }}</td>
+                  <td>{{ $m->user->email }}</td>
+                  <td>{{ $m->user->status }}</td>
                   <td class="d-inline-flex justify-content-center w-100">
                     <button class="btnDetailVerifikasiMember btn btn-sm btn-secondary text-white"
                       data-id="{{ $m->id }}">Detail</button>

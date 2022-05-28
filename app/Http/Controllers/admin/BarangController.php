@@ -53,7 +53,8 @@ class BarangController extends Controller
         Storage::putFileAs('public/img', $request->file, "{$barang->id}.jpg");
 
         //dd($barang); //cara cari tau isi variable barang
-        return redirect()->route('admin.barang.index')->with('status', 'Barang telah ditambah');
+        return redirect()->route('admin.barang.index')->with('success', 'Barang telah ditambah');
+
     }
 
     /**
@@ -97,18 +98,7 @@ class BarangController extends Controller
             'harga' => $request->harga,
         ]);
 
-        return redirect()->route('admin.barang.index');
-        // $barangs = Barang::find($id);
-
-
-        // $barangs->nama = $request->nama;
-        // $barangs->deskripsi = $request->deskripsi;
-        // $barangs->stok = $request->stok;
-        // $barangs->harga = $request->harga;
-
-        // $barangs->save();
-
-        // return redirect()->route('barang.index');
+        return redirect()->route('admin.barang.index')->with('success', 'Barang telah diupdate');
     }
 
     /**
@@ -123,6 +113,6 @@ class BarangController extends Controller
         $namaBarang = $barangs->nama;
         $barangs->delete();
 
-        return redirect()->route('admin.barang.index')->with('Status', 'Barang dengan nama' . $namaBarang . 'telah dihapus');
+        return redirect()->route('admin.barang.index')->with('success', 'Barang dengan nama ' . $namaBarang . ' telah dihapus');
     }
 }

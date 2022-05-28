@@ -6,21 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Keranjang extends Model
 {
-    protected $fillable = ['nama', 'barang_id', 'jumlah'];
-    protected $appends = ['checkoutable'];
+    protected $table = 'keranjangs';
 
-    public function getCheckoutableAttribute()
-    {
-        return $this->attributes['jumlah'] <= $this->barang->stok;
-    }
+    protected $guarded = [];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function barang()
+    public function keranjangDetails()
     {
-        return $this->belongsTo(Barang::class);
+        return $this->hasMany(KeranjangDetail::class);
     }
 }

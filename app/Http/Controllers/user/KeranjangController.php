@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Keranjang;
+use App\Models\KeranjangDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
@@ -18,9 +19,9 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $keranjangs = Keranjang::with(['barang'])->where('user_id', Auth::id())->get();
-        // dd($keranjangs->toJson());
-        return view('user.keranjang.index', ['keranjangs' => $keranjangs]);
+        $keranjang = Keranjang::with(['keranjangDetails.barang'])->firstWhere('user_id', Auth::id());
+
+        return view('user.keranjang.index', compact('keranjang'));
     }
 
     /**
@@ -45,23 +46,41 @@ class KeranjangController extends Controller
         try {
             $user = Auth::user();
 
-            $keranjang = Keranjang::where([
-                ['user_id', $user->id],
-                ['barang_id', $request->barang]
-            ])->first();
+            $keranjang = Keranjang::with(['keranjangDetails'])->firstWhere('user_id', $user->id);
 
             if ($keranjang) {
-                $keranjang->update(['jumlah' => $keranjang->jumlah + $request->jumlah]);
+                if ($keranjang->tanggal_sewa == $request->tanggal_sewa && $keranjang->tanggal_batas_kembali == $keranjang->tanggal_batas_kembali) {
+                    $keranjangDetails = $keranjang->keranjangDetails;
+                    $barang = $keranjangDetails->firstWhere('barang_id', $request->barang);
+
+                    if ($barang) {
+                        $barang->update(['jumlah' => $barang->jumlah + $request->jumlah]);
+                    } else {
+                        $keranjang->keranjangDetails()->create([
+                            'barang_id' => $request->barang,
+                            'jumlah' => $request->jumlah,
+                            'subtotal' => $request->subtotal
+                        ]);
+                    }
+                } else {
+                    return redirect()->back()->withErrors(['status' => "Tanggal keranjang tidak sama"]);
+                }
             } else {
-                $user->keranjangs()->create([
+                $k = $user->keranjangs()->create([
+                    'tanggal_sewa' => $request->tanggal_sewa,
+                    'tanggal_batas_kembali' => $request->tanggal_batas_kembali
+                ]);
+
+                $k->keranjangDetails()->create([
                     'barang_id' => $request->barang,
                     'jumlah' => $request->jumlah,
+                    'subtotal' => $request->subtotal
                 ]);
             }
 
             return redirect()->back();
         } catch (Throwable $e) {
-            return redirect()->back()->withErrors("Barang gagal ditambahkan ke keranjang; {$e->getMessage()}");
+            return redirect()->back()->withErrors(['status' => "Barang gagal ditambahkan ke keranjang: {$e->getMessage()}"]);
         }
     }
 
@@ -107,6 +126,10 @@ class KeranjangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $keranjangs = Keranjang::with(['keranjangDetails'])->firstOrFail();
+        //$keranjangs = KeranjangDetail::whereId($id)->firstOrFail();
+        $keranjangs->delete();
+
+        return redirect()->route('user.keranjang.index')->with('Status', 'Barang dengan nama');
     }
 }

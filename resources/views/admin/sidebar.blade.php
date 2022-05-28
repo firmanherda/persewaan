@@ -10,12 +10,11 @@
 
       <li class="menu-header"></li>
       <li class="nav-item">
-        <a href="{{ route('homeadmin') }}" class="nav-link"><i
-            class="fas fa-fire"></i><span>Home</span></a>
+        <a href="{{ route('homeadmin') }}" class="nav-link"><i class="fas fa-fire"></i><span>Home</span></a>
       <li><a class="nav-link" href="{{ route('admin.member.index') }}"><i class="fas fa-user  "></i>
           <span>Member</span></a></li>
-      <li class="nav-item dropdown"s
-      <li><a class="nav-link" href="{{ route('admin.verifikasimember.index') }}"><i class="fas fa-user  "></i>
+      <li class="nav-item dropdown" s <li><a class="nav-link"
+          href="{{ route('admin.verifikasimember.index') }}"><i class="fas fa-user  "></i>
           <span>Verifikasi Member</span></a></li>
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.barang.index') }}"><i class="fas fa-briefcase"></i>
@@ -24,14 +23,15 @@
       <li><a class="nav-link" href="{{ route('admin.pesanan.index') }}"><i class="fas fa-envelope  "></i>
           <span>Pesanan Masuk</span></a></li>
       <li class="nav-item dropdown">
+      <li><a class="nav-link" href="{{ route('admin.pengambilanbarang.index') }}"><i
+            class="fas fa-envelope  "></i>
+          <span>Pengambilan Barang</span></a></li>
+      <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.barangdisewa.index') }}"><i class="fas fa-bell  "></i>
           <span>Barang Sedang Disewa</span></a></li>
       <li class="nav-item dropdown">
       <li><a class="nav-link" href="{{ route('admin.riwayattransaksi.index') }}"><i class="fas fa-file  "></i>
           <span>Riwayat Transaksi Selesai</span></a></li>
-
-      </li>
-
       </li>
       <li class="menu-header">Sistem Penunjang Keputusan</li>
       <li class="nav-item dropdown">
@@ -39,9 +39,9 @@
           <span>Copras</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('admin.kriteria.index') }}">Kriteria</a></li>
-          <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Sub Kriteria</a></li>
+          <li><a class="nav-link" href="{{ route('admin.subkriteria.index') }}">Sub Kriteria</a></li>
           <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Alternatif</a></li>
-          <li><a class="nav-link" href="{{ route('admin.alternatif.index') }}">Penilaian</a></li>
+          <li><a class="nav-link" href="{{ route('admin.penilaian.index') }}">Penilaian</a></li>
           {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
         </ul>
       </li>

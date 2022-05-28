@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
@@ -15,7 +16,7 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesananuser = Transaksi::where('status_pembayaran', 'Menunggu Pembayaran')->get();
+        $pesananuser = Transaksi::where('status_pembayaran', 'Menunggu Pembayaran')->where('user_id',Auth::id())->get();
 
         return view('user.pesanan.index', compact('pesananuser'));
     }

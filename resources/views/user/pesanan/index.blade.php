@@ -20,7 +20,7 @@
             <th>Nama</th>
             <th>Tanggal Sewa</th>
             <th>Batas Pengembalian</th>
-            <th>Status Pembayaran</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
@@ -29,9 +29,14 @@
             <tr class="listpesananuser">
               <td> {{ $pu->id }}</td>
               <td>{{ $pu->user->nama }}</td>
-              <td>{{ $pu->tanggal_sewa }}</td>
-              <td>{{ $pu->tanggal_batas_kembali }}</td>
-              <td>{{ $pu->status_pembayaran }}</td>
+              <td>{{ \Carbon\Carbon::parse($pu->tanggal_sewa)->format('d M Y') }}</td>
+              <td>{{ \Carbon\Carbon::parse($pu->tanggal_batas_kembali)->format('d M Y') }}</td>
+              @if ($pu->status_pembayaran != 'Lunas')
+                <td>{{ $pu->status_pembayaran }}</td>
+              @endif
+              @if ($pu->status_pengambilan_barang)
+                <td>{{ $pu->status_pengambilan_barang }}</td>
+              @endif
               <td>
                 <br>
                 <a href="{{ route('user.pesanan.show', $pu->id) }}"

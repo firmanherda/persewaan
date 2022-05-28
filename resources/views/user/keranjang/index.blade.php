@@ -1,6 +1,6 @@
 @extends('user.app')
 @section('content')
-  <h2>Barang user </h2>
+  <h2>Keranjang </h2>
 
   @error('status')
     <div class="alert alert-danger" role="alert">
@@ -11,46 +11,63 @@
     </div>
   @enderror
 
-  <div class="bg-white p-4 rounded shadow">
-    <div class="d-flex justify-content-between align-middle">
-      @foreach ($keranjangs as $keranjang)
-        <div class="col-2">
-          <img class="img-fluid" src="{{ asset("storage/img/{$keranjang->barang->link_foto}") }}"
-            alt="{{ $keranjang->barang->nama }}">
-        </div>
-        <div class="my-auto @if (!$keranjang->checkoutable) bg-danger @endif">
-          <p>{{ $keranjang->barang->nama }}</p>
-          <p>Jumlah: {{ $keranjang->jumlah }}</p>
-          <p class="subtotal" data-subtotal="{{ $keranjang->barang->harga * $keranjang->jumlah }}">
-            Subtotal: @rupiah($keranjang->barang->harga * $keranjang->jumlah)</p>
-        </div>
-      @endforeach
-    </div>
-    <div class="row">
-      <div class="col">
-        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal"
-          data-bs-target="#modalCheckout">{{ __('Checkout') }}</button>
-      </div>
-    </div>
+  @php
+  if ($keranjang) {
+      $tanggalSewa = \Carbon\Carbon::parse($keranjang->tanggal_sewa);
+      $tanggalKembali = \Carbon\Carbon::parse($keranjang->tanggal_batas_kembali);
+      $lamaSewa = $tanggalSewa->diffInDays($tanggalKembali);
+  }
+  @endphp
 
-    <div id="modalCheckout" class="modal fade" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Masukkan keranjang</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="{{ route('user.transaksi.store') }}" method="POST">
-              @csrf
-              <input type="date" name="tanggal_sewa">
-              <input type="date" name="tanggal_batas_kembali">
-              <button type="submit" class="btn btn-primary">Checkout</button>
-            </form>
+  <div class="bg-white p-4 rounded shadow">
+    @if ($keranjang)
+      <form action="{{ route('user.transaksi.store') }}" method="POST">
+        @csrf
+        <input type="date" name="tanggal_sewa" value="{{ $tanggalSewa }}" hidden>
+        <input type="date" name="tanggal_batas_kembali" value="{{ $tanggalKembali }}" hidden>
+        <p>Tanggal Sewa : {{ $tanggalSewa->format('d M Y') }}</p>
+        <p>Tanggal Kembali : {{ $tanggalKembali->format('d M Y') }}</p>
+        <p>Lama Sewa : {{ $lamaSewa }} Hari</p>
+        <div class="d-flex justify-content-between align-middle">
+          @foreach ($keranjang->keranjangDetails as $k)
+            <div class="col-2">
+              <img class="img-fluid" src="{{ asset("storage/img/{$k->barang->link_foto}") }}"
+                alt="{{ $k->barang->nama }}">
+            </div>
+            <div class="my-auto @if (!$k->checkoutable) bg-danger @endif">
+              <p>{{ $k->barang->nama }}</p>
+              {{-- <input type="number" class="form-control" autocomplete="off" name="jumlah" min="1" id="jumlah"
+                placeholder="Jumlah" value="{{ $k->jumlah }}"> --}}
+              <p>Jumlah: {{ $k->jumlah }}</p>
+              <p class="subtotal" data-subtotal="{{ $k->barang->harga * $k->jumlah * $lamaSewa }}">
+                Subtotal: @rupiah($k->barang->harga * $k->jumlah * $lamaSewa)</p>
+
+            </div>
+
+
+          @endforeach
+
+        </div>
+        <button  class="btn btn-sm btn-danger" href="{{ route('user.keranjang.destroy', $keranjang->id) }}" onclick="event.preventDefault(); document.getElementById('delete').submit();">
+          Delete
+        </button>
+        <div class="row">
+          {{-- <a href="{{ route('user.keranjang.destroy', $keranjang->id) }}" onclick="event.preventDefault(); document.getElementById('delete').submit();">
+            Delete
+          </a> --}}
+
+          <div class="col">
+            <button type="submit" class="btn btn-primary text-white">{{ __('Checkout') }}</button>
           </div>
         </div>
-      </div>
-    </div>
+      </form>
+      <form id="delete" action="{{ route('user.keranjang.destroy', $keranjang->id) }}" method="POST" style="display: none;">
+        @csrf
+        @method('DELETE');
+      </form>
+    @else
+      <p>KERANJANG KOSONG, SILAHKAN TAMBAH BARANG PADA HALAMAN UTAMA!</p>
+    @endif
   </div>
 @endsection
 

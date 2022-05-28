@@ -18,7 +18,7 @@
       <table class="table" id="tableBarangSedangDisewa" width="100%">
         <thead>
           <tr>
-            <th>No</th>
+            <th>ID Transaksi</th>
             <th>Nama</th>
             <th>Tanggal Sewa</th>
             <th>Batas Pengembalian</th>
@@ -29,10 +29,10 @@
         <tbody>
           @foreach ($bsd as $b)
             <tr class="listBarangSedangDisewa">
-              <td> {{ $b->user->id }}</td>
+              <td> {{ $b->id }}</td>
               <td>{{ $b->user->nama }}</td>
-              <td>{{ $b->tanggal_sewa }}</td>
-              <td>{{ $b->tanggal_batas_kembali }}</td>
+              <td>{{ \Carbon\Carbon::parse($b->tanggal_sewa)->format('d M Y') }}</td>
+              <td>{{ \Carbon\Carbon::parse($b->tanggal_batas_kembali)->format('d M Y') }}</td>
               <td>{{ $b->status_transaksi }}</td>
               <td>
                 <a href="{{ route('admin.barangdisewa.show', $b->id) }}"

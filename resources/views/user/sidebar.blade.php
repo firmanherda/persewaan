@@ -21,12 +21,6 @@
           <span>Profil</span>
         </a>
       </li>
-      {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.barang.index') }}">
-          <i class="far fa-square"></i>
-          <span>Paket</span>
-        </a>
-      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="{{ route('user.keranjang.index') }}">
           <i class="fas fa-shopping-cart"></i>
@@ -51,31 +45,26 @@
           <span>Riwayat Pesanan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('user.spk.index') }}">
+          <i class="far fa-clock"></i>
+          <span>Rekomendasi Paket Alat Camping</span>
+        </a>
+      </li>
+      {{-- <li class="menu-header">PERATURAN PERSEWAAN</li>
+      <li><a class="nav-link" href="{{ route('admin.riwayattransaksi.index') }}"><i class="fas fa-file  "></i>
+          <span>Syarat dan Ketentuan</span></a></li>
+      </li> --}}
 
-      <li class="nav-item dropdown">
+
+      {{-- <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown">
           <i class="fas fa-columns"></i>
           <span>Rekomendasi Alat Mendaki</span>
         </a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="layout-default.html">Kriteria</a></li>
-          <li><a class="nav-link" href="layout-transparent.html">Alternatif</a></li>
-          {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
+          <li><a class="nav-link" href="{{ route('user.spk.index') }}">SPK</a></li>
         </ul>
-      </li>
-
-      </li>
-      <li class="menu-header">Sistem Penunjang Keputusan</li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
-          <span>Layout</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-          <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-          {{-- <li><a class="nav-link" href="{{route('barang.index')}}">Barang</a></li> --}}
-        </ul>
-      </li>
-
-
+      </li> --}}
   </aside>
 </div>

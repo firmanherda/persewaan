@@ -5,7 +5,7 @@
     <div class="card-header">
       <h2 class="card-title">Detail Pesanan</h2>
     </div>
-    <h3 class='text-center'>HARAP LAKUKAN PEMBAYARAN MAXIMAL 3 JAM SETELAH PESAN</h3>
+    {{-- <h3 class='text-center'>HARAP LAKUKAN PEMBAYARAN MAXIMAL 3 JAM SETELAH PESAN</h3> --}}
     <div class="card-body container-fluid">
       <div class="container-fluid mx-auto h5">
         <div class="row justify-content-center">
@@ -33,7 +33,7 @@
           <div class="col-7 col-md-4 ps-1 fw-bold">@rupiah($pesananuser->total_harga)</div>
         </div>
       </div>
-      <h3 class='text-center'>Note : Pembayaran bisa dilakukan langsung ke Toko atau Transfer ke rekening bank dengan sertakan Format atau Berita ID Transaksi Anda.</h3>
+      {{-- <h3 class='text-center'>Note : Pembayaran bisa dilakukan langsung ke Toko atau Transfer ke rekening bank dengan sertakan Format atau Berita ID Transaksi Anda.</h3> --}}
 
       <table class="table table-bordered w-100 mt-5">
         <thead>

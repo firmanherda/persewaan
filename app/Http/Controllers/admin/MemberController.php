@@ -20,10 +20,8 @@ class MemberController extends Controller
     {
         // $members = User::where("status","diterima")->get();
         $members = User::where([
-            ['role', 'user'],
-            ['status', 'diterima']
+            ['role', 'user']
         ])->get();
-        // $members = User::all();
         return view('admin.member.index' , ['members' => $members]);
     }
 
@@ -34,8 +32,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $kategoris = Kategori::all();
-        return view('admin.member.create', ['kategoris' => $kategoris]);
+        $members = User::all();
+        return view('admin.member.create', ['members' => $members]);
     }
 
     /**
@@ -46,6 +44,13 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
+        // $data = User::where('email', $request->email)->get();
+        // if($data){
+        //     return back()->with('success','Email sudah tersedia');
+        // }
+
+
+
         $user = User::create([
             'nama' => $request->nama,
             'email' => $request->email,
@@ -53,10 +58,12 @@ class MemberController extends Controller
             'no_hp' => $request->no_hp,
             'alamat' =>$request->alamat,
             'role_id' => 2,
+
         ]);
 
 
-        return redirect()->route('admin.member');
+
+        return redirect()->route('admin.member.index')->with('success', 'Member Berhasil Ditambahkan');
     }
 
     /**
@@ -67,7 +74,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        // $members = User::with(['nama', 'email'])->find($id);
+
         $members = User::find($id);
 
         return view('admin.member.show', ['member' => $members]);
@@ -103,13 +110,8 @@ class MemberController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('member.index');
-        // $members->nama = $request->nama;
-        // $members->email = $request->email;
-        // $members->no_hp = $request->no_hp;
-        // $members->alamat = $request->alamat;
+        return redirect()->route('admin.member.index');
 
-        // $members->save();
     }
 
     /**

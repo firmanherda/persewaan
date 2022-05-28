@@ -28,8 +28,8 @@
             <tr class="listRiwayatTransaksi">
               <td> {{ $r->id }}</td>
               <td>{{ $r->user->nama }}</td>
-              <td>{{ $r->tanggal_sewa }}</td>
-              <td>{{ $r->tanggal_batas_kembali }}</td>
+              <td>{{ \Carbon\Carbon::parse($r->tanggal_sewa)->format('d M Y') }}</td>
+              <td>{{ \Carbon\Carbon::parse($r->tanggal_batas_kembali)->format('d M Y') }}</td>
               <td>
                 <br>
                 <a href="{{ route('admin.riwayattransaksi.show', $r->id) }}"

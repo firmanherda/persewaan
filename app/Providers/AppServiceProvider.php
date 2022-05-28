@@ -31,13 +31,12 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo 'Rp ' . number_format($money,  0, ',', '.'); ?>";
         });
 
-        View::composer('user.*', function () {
+        /* View::composer('user.*', function () {
             if (Auth::user()->role == 'user') {
-                $keranjangs = Keranjang::with(['barang'])
-                    ->where('user_id', Auth::id())
-                    ->get();
-                View::share('keranjangs', $keranjangs);
+                $keranjang = Keranjang::with(['keranjangDetails.barang'])
+                    ->firstWhere('user_id', Auth::id());
+                View::share('keranjang', $keranjang);
             }
-        });
+        }); */
     }
 }

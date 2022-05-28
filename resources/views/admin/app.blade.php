@@ -26,6 +26,7 @@
     @endguest
 
     @auth
+    @include('sweetalert::alert')
       <div class="main-wrapper">
 
         @include('admin.navbar')

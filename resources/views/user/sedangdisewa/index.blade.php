@@ -32,8 +32,9 @@
               <td>{{ $b->tanggal_batas_kembali }}</td>
               <td>{{ $b->status_transaksi }}</td>
               <td>
-                <button id="btnEditBarangSedangDisewa" data-id="{{ $b->id }}"
-                  class="btn btn-primary align-self-lg-start">Detail</button>
+                <a href="{{ route('user.sedangdisewa.show', $b->id) }}"
+                  class="btn btn-primary align-self-lg-start">Detail</a>
+              </td>
               </td>
             </tr>
           @endforeach
@@ -69,23 +70,13 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
-    // $('#btnTambahBarang').click(function() {
-    //   $('#modalBarangSedangDisewa').modal('show');
-    //   $('#modalBarangSedangDisewaContent').html('');
-    //   $('#modalLoading').show();
-    //   $.get(`barangSedangDisewa/create`, function(res) {
-    //     $('#modalLoading').hide();
-    //     $('#modalBarangContent').html(res);
-    //   });
-    // });
-    $('.listBarangSedangDisewa #btnEditBarangSedangDisewa').click(function() {
-      const id = $(this).data('id');
+    $('#btnTambahBarang').click(function() {
       $('#modalBarangSedangDisewa').modal('show');
       $('#modalBarangSedangDisewaContent').html('');
       $('#modalLoading').show();
-      $.get(`barang/${id}/edit`, function(res) {
+      $.get(`barangSedangDisewa/create`, function(res) {
         $('#modalLoading').hide();
-        $('#modalBarangSedangDisewaContent').html(res);
+        $('#modalBarangContent').html(res);
       });
     });
     $('.listBarangSedangDisewa .btnDetailBarangSedangDisewa').click(function() {

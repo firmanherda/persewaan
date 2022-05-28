@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengeluaran;
+use App\Models\Transaksi;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +17,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $users = User::all();
+        $pengeluarans = Pengeluaran::all();
+        $transaksis = Transaksi::all();
+        $sedangdisewa = $transaksis->where('status_transaksi','Belum Dikembalikan')->sum('jumlah');
+        $pemasukans = $transaksis->where('status_transaksi','Selesai');
+        return view('admin.home', compact('users','pengeluarans','transaksis','pemasukans','sedangdisewa'));
     }
 
     /**
@@ -24,7 +32,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +43,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
