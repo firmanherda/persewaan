@@ -40,8 +40,6 @@ class SPKController extends Controller
             'penilaians' => clone $penilaians,
             'totals' => $totals
         ]);
-        // end 1
-
         // 2. Normalisasi Matriks
         //map adalah array diubah
         //tmp adalah untuk penampung
@@ -50,27 +48,20 @@ class SPKController extends Controller
             $ps1 = clone $penilaian1;
             return $ps1->map(function ($p, $i) use ($totals) {
                 $tmp2 = clone $p;
-                $tmp2->nilai = round(($tmp2->nilai / $totals[$i]->total), 3);
+                $tmp2->nilai = bcdiv(($tmp2->nilai / $totals[$i]->total), 1,2);
 
                 return $tmp2;
             });
         });
-        // end 2
-
-
         // 3. Normalisasi Matriks terbobot (Xij * Wj)
         $step3 = $step2->map(function ($s2) use ($bobots) {
             return $s2->map(function ($hasil2, $i) use ($bobots) {
                 $tmp3 = clone $hasil2;
-                $tmp3->nilai = round(($tmp3->nilai * $bobots[$i]), 3);
+                $tmp3->nilai = bcdiv(($tmp3->nilai * $bobots[$i]), 1,2);
 
                 return $tmp3;
             });
         });
-
-        // end 3
-
-
         // 4. Menghitung nilai maksimal dan minimal Indeks
         $jenis = $step3->map(function ($s3) {
             $tmpJenis = clone $s3;
@@ -81,20 +72,17 @@ class SPKController extends Controller
             return $j->map(function ($hasilJenis) {
                 $tmp4 = clone $hasilJenis;
                 return [
-                    'nilai_indeks' => round($tmp4->sum('nilai'), 3),
+                    'nilai_indeks' => bcdiv($tmp4->sum('nilai'),1,2),
                     'penilaians' => $tmp4
                 ];
             });
         });
-        // end 4
-
-        // dd($step4);
 
         // 5. Hitung bobot relatif
         $step51 = [];
         $step51 = clone $step4->map(function ($s4) {
             return [
-                'Cost' => ['nilai' => round(1 / $s4['Cost']['nilai_indeks'], 3)],
+                'Cost' => ['nilai' => bcdiv(1 / $s4['Cost']['nilai_indeks'], 1,2)],
                 'Benefit' => ['nilai' => $s4['Benefit']['nilai_indeks']]
             ];
         });
@@ -103,21 +91,21 @@ class SPKController extends Controller
         $step51['sum_benefit'] = $step51->sum('Benefit.nilai');
 
         $step52 = clone $step4->map(function ($s51) use ($step51) {
-            return ['nilai' => round($s51['Cost']['nilai_indeks'] * $step51['sum_cost'], 3)];
+            return ['nilai' => bcdiv($s51['Cost']['nilai_indeks'] * $step51['sum_cost'], 1,2)];
         });
 
         $step53 = clone $step52->map(function ($s53) use ($step4) {
             $totalS4 = $step4->sum('Cost.nilai_indeks');
-            return ['nilai' => round($totalS4 / $s53['nilai'], 3)];
+            return ['nilai' => bcdiv($totalS4 / $s53['nilai'], 1,2)];
         });
 
         $step54 = clone $step53->map(function ($s54, $i) use ($step51) {
-            return ['nilai' => round(($step51[$i]['Benefit']['nilai'] + $s54['nilai']), 3)];
+            return ['nilai' => bcdiv(($step51[$i]['Benefit']['nilai'] + $s54['nilai']), 1,2)];
         });
         $max = $step54->max('nilai');
 
         $step55 = clone $step54->map(function ($s55) use ($max) {
-            return ['nilai' => round($s55['nilai'] / $max * 100, 2)];
+            return ['nilai' => bcdiv($s55['nilai'] / $max * 100, 1,2)];
         });
 
         $step5 = ['step51' => $step51, 'step52' => $step52, 'step53' => $step53, 'step54' => $step54, 'step55' => $step55];
